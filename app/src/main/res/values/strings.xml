@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">PraktikumProgmob2021</string>
+    <string name="app_name">Praktikum Progmob</string>
+    <string name="regis"><u>New User? Register Now</u></string>
 </resources>

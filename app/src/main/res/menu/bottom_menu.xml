@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/explore"
+        android:icon="@drawable/ic_explore"
+        android:title="Explore"
+        app:cnb_iconColor="@color/white"
+        app:cnb_backgroundColor = "@color/blue"/>
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/ic_home"
+        android:title="Home"
+        app:cnb_iconColor="@color/white"
+        app:cnb_backgroundColor = "@color/blue"/>
+    <item
+        android:id="@+id/newJob"
+        android:icon="@drawable/ic_new"
+        android:title="My Jobs"
+        app:cnb_iconColor="@color/white"
+        app:cnb_backgroundColor = "@color/blue" />
+</menu>

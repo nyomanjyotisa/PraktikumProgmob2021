@@ -55,10 +55,10 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
                 android:background="@drawable/background_edt"
+                android:paddingStart="20dp"
                 android:ems="10"
                 android:hint="Enter Your Email..."
                 android:inputType="textEmailAddress"
-                android:paddingStart="20dp"
                 android:textSize="17sp" />
 
             <TextView

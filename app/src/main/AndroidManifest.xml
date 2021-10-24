@@ -12,6 +12,7 @@
         <activity android:name=".LoginActivity"></activity>
         <activity android:name=".SignupActivity"></activity>
         <activity android:name=".MainActivity"></activity>
+        <activity android:name=".AddJobActivity"></activity>
         <activity android:name=".IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

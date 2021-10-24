@@ -1,205 +1,339 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.0">
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/companyLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/blue"
+            android:text="Company Information"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="20dp"
-                android:text="New Job Vacancy"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/companyNameEditText"
+            android:layout_width="match_parent"
+            android:hint="Company Name"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="20dp"
+            android:inputType="text"
+            android:textSize="14sp"
+            style="@style/CustomMaterialDesignTextField"
+            app:startIconDrawable="@drawable/ic_office"
+            app:startIconTint="@color/blue"
+            app:layout_constraintTop_toBottomOf="@id/companyLabel"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
 
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:text="Job Title"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/editTextTextPersonName3"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="32dp"
-                android:ems="10"
-                android:hint="Enter Job Title..."
-                android:inputType="text"
-                android:textSize="17sp" />
-
-            <TextView
-                android:id="@+id/textView6"
+            <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:text="Job Description"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                />
 
-            <EditText
-                android:id="@+id/editTextTextPersonName2"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="32dp"
-                android:ems="10"
-                android:hint="Enter Job Description..."
-                android:inputType="text"
-                android:textSize="17sp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:text="Category"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/locationEditText"
+            android:layout_width="match_parent"
+            android:hint="Location"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="20dp"
+            android:inputType="text"
+            android:textSize="14sp"
+            style="@style/CustomMaterialDesignTextField"
+            app:startIconDrawable="@drawable/ic_location"
+            app:startIconTint="@color/blue"
+            app:layout_constraintTop_toBottomOf="@id/companyNameEditText"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
 
-            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="32dp"
-                android:orientation="vertical">
+                />
 
-                <RadioButton
-                    android:id="@+id/radio_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="onRadioButtonClicked"
-                    android:text="Marketing" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-                <RadioButton
-                    android:id="@+id/radio_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="onRadioButtonClicked"
-                    android:text="Development" />
+        <TextView
+            android:id="@+id/jobLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="35dp"
+            android:textColor="@color/blue"
+            android:text="Job Information"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/locationEditText" />
 
-                <RadioButton
-                    android:id="@+id/radio_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="onRadioButtonClicked"
-                    android:text="Design" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/jobTitleEditText"
+            android:layout_width="match_parent"
+            android:hint="Job Title"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="20dp"
+            android:inputType="text"
+            android:textSize="14sp"
+            style="@style/CustomMaterialDesignTextField"
+            app:startIconDrawable="@drawable/ic_job_title"
+            app:startIconTint="@color/blue"
+            app:layout_constraintTop_toBottomOf="@id/jobLabel"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
 
-                <RadioButton
-                    android:id="@+id/radio_4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="onRadioButtonClicked"
-                    android:text="Programming" />
-            </RadioGroup>
-
-            <TextView
-                android:id="@+id/jobtype"
+            <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:text="Job Type"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                />
 
-            <LinearLayout
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/jobDescEditText"
+            android:layout_width="match_parent"
+            android:hint="Job Description"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="20dp"
+            android:inputType="textMultiLine"
+            android:textSize="14sp"
+            style="@style/CustomMaterialDesignTextField"
+            app:startIconDrawable="@drawable/ic_job_desc"
+            app:startIconTint="@color/blue"
+            app:layout_constraintTop_toBottomOf="@id/jobTitleEditText"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="32dp"
-                android:orientation="horizontal">
+                />
 
-                <CheckBox
-                    android:id="@+id/fulltime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Full Time" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-                <CheckBox
-                    android:id="@+id/parttime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Part Time" />
+        <TextView
+            android:id="@+id/jobTypeLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="35dp"
+            android:textColor="@color/blue"
+            android:text="Job Type"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/jobDescEditText" />
 
-                <CheckBox
-                    android:id="@+id/intern"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Intern" />
-            </LinearLayout>
+        <RadioGroup
+            android:id="@+id/jobTypeRadio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/jobTypeLabel"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
 
-            <TextView
-                android:id="@+id/salary"
-                android:layout_width="match_parent"
+            <RadioButton
+                android:id="@+id/jobType1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:text="Salary"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:button="@android:color/transparent"
+                android:background="@drawable/radio_selector_left"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:text="Full Time"
+                app:layout_constraintLeft_toLeftOf="parent"/>
 
-            <TextView
-                android:id="@+id/valueSalary"
-                android:layout_width="match_parent"
+            <RadioButton
+                android:id="@+id/jobType2"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginButton="8dp"
-                android:text="USD 100"
-                android:textSize="20sp" />
+                android:button="@android:color/transparent"
+                android:background="@drawable/radio_selector_center"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:text="Part Time" />
 
-            <SeekBar
-                android:id="@+id/seekBar"
-                style="@style/Widget.AppCompat.SeekBar"
-                android:layout_width="match_parent"
+            <RadioButton
+                android:id="@+id/jobType3"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="32dp"
-                android:max="300000"
-                android:progress="100" />
+                android:button="@android:color/transparent"
+                android:background="@drawable/radio_selector"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:text="Internship"
+                app:layout_constraintRight_toRightOf="parent"/>
+        </RadioGroup>
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="35dp"
-                android:layout_marginBottom="35dp"
-                android:background="@drawable/orange_background"
-                android:elevation="3dp"
-                android:text="Submit" />
-        </LinearLayout>
-    </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/benefits"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="35dp"
+            android:textColor="@color/blue"
+            android:text="Benefits"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/jobTypeRadio"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <CheckBox
+            android:id="@+id/benefit1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="20dp"
+            android:layoutDirection="rtl"
+            android:text="Flexible Hours"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/benefits" />
+
+        <CheckBox
+            android:id="@+id/benefit2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="20dp"
+            android:layoutDirection="rtl"
+            android:text="13th Month Salary"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/benefit1" />
+
+        <CheckBox
+            android:id="@+id/benefit3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="20dp"
+            android:layoutDirection="rtl"
+            android:text="Work From Home"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/benefit2" />
+
+        <CheckBox
+            android:id="@+id/benefit4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="20dp"
+            android:layoutDirection="rtl"
+            android:text="Health Insurance"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/benefit3" />
+
+        <TextView
+            android:id="@+id/salaryLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="35dp"
+            android:text="Monthly Salary"
+            android:textColor="@color/blue"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/benefit4"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/currencyTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:text="USD"
+            android:textSize="20sp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintTop_toBottomOf="@id/benefit4"
+            app:layout_constraintRight_toLeftOf="@id/salaryEditText" />
+
+        <EditText
+            android:id="@+id/salaryEditText"
+            android:layout_width="wrap_content"
+            android:minWidth="75dp"
+            android:layout_height="50sp"
+            android:layout_marginTop="23dp"
+            android:gravity="center"
+            android:inputType="number"
+            android:textSize="20sp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/benefit4" />
+
+        <SeekBar
+            android:id="@+id/salarySeekBar"
+            style="@style/Widget.AppCompat.SeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:max="20000"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/salaryEditText" />
+
+        <Button
+            android:id="@+id/createButton"
+            android:text="Create Job"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/orange_background"
+            android:elevation="3dp"
+            android:layout_gravity="center_horizontal"
+            app:layout_constraintTop_toBottomOf="@id/salarySeekBar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

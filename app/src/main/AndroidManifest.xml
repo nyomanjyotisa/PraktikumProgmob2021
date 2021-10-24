@@ -8,18 +8,17 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.PraktikumProgmob2021">
+        android:theme="@style/SplashTheme">
         <activity android:name=".LoginActivity"></activity>
         <activity android:name=".SignupActivity"></activity>
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".AddJobActivity"></activity>
-        <activity android:name=".IntroActivity">
+        <activity android:name=".AddJobActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".SplashActivity"></activity>
     </application>
 
 </manifest>

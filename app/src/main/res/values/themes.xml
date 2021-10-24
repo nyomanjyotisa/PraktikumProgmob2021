@@ -26,4 +26,9 @@
         <item name="boxCornerRadiusTopStart">10dp</item>
     </style>
 
+    <style name="SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_bg</item>
+        <item name="android:statusBarColor">@color/white</item>
+    </style>
+
 </resources>

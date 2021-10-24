@@ -42,6 +42,7 @@ public class AddJobActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.Theme_PraktikumProgmob2021);
         setContentView(R.layout.activity_add);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

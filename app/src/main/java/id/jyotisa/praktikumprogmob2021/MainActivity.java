@@ -3,7 +3,11 @@ package id.jyotisa.praktikumprogmob2021;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
@@ -15,7 +19,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.Theme_PraktikumProgmob2021);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
 
         chipNavigationBar = findViewById(R.id.chipNav);
 
@@ -41,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 if (fragment != null) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
                 }
+
             }
         });
     }

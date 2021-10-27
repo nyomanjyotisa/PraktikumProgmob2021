@@ -13,7 +13,9 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.Theme_PraktikumProgmob2021);
         setContentView(R.layout.activity_login);
+        getSupportActionBar().hide();
 
         Button btnLogin = findViewById(R.id.button);
         TextView tvSignup = findViewById(R.id.textView3);

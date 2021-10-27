@@ -13,8 +13,10 @@ public class SignupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.Theme_PraktikumProgmob2021);
         setContentView(R.layout.activity_signup);
-
+        getSupportActionBar().hide();
+        
         Button btnSignup = findViewById(R.id.button);
 
         btnSignup.setOnClickListener(new View.OnClickListener() {

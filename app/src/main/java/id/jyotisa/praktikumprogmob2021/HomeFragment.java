@@ -61,15 +61,16 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
-        Button btnCreate = rootView.findViewById(R.id.createButton);
+        Button btnCreate = (Button) rootView.findViewById(R.id.createButton);
 
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, AddJobActivity.class));
+                startActivity(new Intent(getActivity(), AddJobActivity.class));
             }
         });
+        return rootView;
     }
 }

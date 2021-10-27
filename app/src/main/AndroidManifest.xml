@@ -18,6 +18,7 @@
         <activity android:name=".SignupActivity"></activity>
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".AddJobActivity"></activity>
+        <activity android:name=".DetailActivity"></activity>
     </application>
 
 </manifest>

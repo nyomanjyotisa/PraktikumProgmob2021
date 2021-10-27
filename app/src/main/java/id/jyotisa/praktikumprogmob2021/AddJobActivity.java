@@ -22,7 +22,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class AddJobActivity extends AppCompatActivity {
 
@@ -62,7 +65,10 @@ public class AddJobActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                seekBarSalary.setProgress(Integer.parseInt(etSalary.getText().toString()));
+                if(etSalary.getText().toString().trim().length() > 0) {
+                    seekBarSalary.setProgress(Integer.parseInt(etSalary.getText().toString()));
+                    etSalary.setSelection(etSalary.getText().length());
+                }
             }
 
             @Override
@@ -159,7 +165,7 @@ public class AddJobActivity extends AppCompatActivity {
 
         StringBuilder stringBenefits = new StringBuilder();
         for (String s : benefits)
-            stringBenefits.append(s).append("\n");
+            stringBenefits.append(" - "+s).append("\n");
 
         etCompanyName = findViewById(R.id.companyNameEditText);
         etJobTitle = findViewById(R.id.jobTitleEditText);
@@ -179,14 +185,17 @@ public class AddJobActivity extends AppCompatActivity {
         tvJobTitle.setText(etJobTitle.getEditText().getText().toString());
         tvJobDesc.setText(etJobDesc.getEditText().getText().toString());
         tvLocation.setText(etLocation.getEditText().getText().toString());
-        tvSalary.setText(etSalary.getText().toString());
+        Integer salary = Integer.parseInt(etSalary.getText().toString());
+//        String formattedSalary = String.format("%,d", salary);
+        String formattedSalary = NumberFormat.getNumberInstance(Locale.US).format(salary);
+        tvSalary.setText("Salary: $"+ formattedSalary  +"/month");
         tvJobType.setText(radioButtonJobType.getText());
         tvBenefits.setText(stringBenefits);
 
-        dialog.setPositiveButton("SUBMIT", new DialogInterface.OnClickListener() {
+        dialog.setPositiveButton("POST", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
+                startActivity(new Intent(AddJobActivity.this, DetailActivity.class));
             }
         });
 

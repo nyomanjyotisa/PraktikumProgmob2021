@@ -15,6 +15,6 @@ public class DetailActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
-        getSupportActionBar().setTitle("Facebook");
+        getSupportActionBar().setTitle("PT Praktikum Pemrograman Mobil");
     }
 }

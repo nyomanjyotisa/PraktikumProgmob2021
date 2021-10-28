@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_constraintBottom_toBottomOf="parent"
@@ -14,6 +15,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/hero"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/orange_background"
+            android:backgroundTint="@color/bgCard"/>
+
+        <ImageView
+            android:id="@+id/heroLeft"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/left_hero"
+            app:layout_constraintLeft_toLeftOf="@+id/hero"
+            app:layout_constraintRight_toLeftOf="@+id/heroRight"
+            app:layout_constraintTop_toTopOf="@+id/hero"
+            app:layout_constraintBottom_toBottomOf="@+id/hero"
+            android:backgroundTint="@color/blue"/>
+
+        <TextView
+            android:id="@+id/heroRight"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="Describe your job clearly to find potential employees"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintLeft_toRightOf="@+id/heroLeft"
+            app:layout_constraintRight_toRightOf="@id/hero"
+            app:layout_constraintTop_toTopOf="@id/hero"
+            app:layout_constraintBottom_toBottomOf="@+id/hero" />
 
         <TextView
             android:id="@+id/companyLabel"
@@ -29,7 +71,7 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/hero" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/companyNameEditText"
@@ -40,7 +82,11 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             android:inputType="text"
+            android:maxLines="1"
             android:textSize="14sp"
+            app:errorEnabled="true"
+            app:errorIconDrawable="@drawable/ic_error"
+            app:counterEnabled="true"
             style="@style/CustomMaterialDesignTextField"
             app:startIconDrawable="@drawable/ic_office"
             app:startIconTint="@color/blue"
@@ -60,11 +106,13 @@
             android:layout_width="match_parent"
             android:hint="Location"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             android:inputType="text"
+            android:maxLines="1"
             android:textSize="14sp"
+            app:counterEnabled="true"
             style="@style/CustomMaterialDesignTextField"
             app:startIconDrawable="@drawable/ic_location"
             app:startIconTint="@color/blue"
@@ -85,7 +133,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="25dp"
             android:textColor="@color/blue"
             android:text="Job Information"
             android:textSize="20sp"
@@ -105,6 +153,7 @@
             android:layout_marginEnd="20dp"
             android:inputType="text"
             android:textSize="14sp"
+            app:counterEnabled="true"
             style="@style/CustomMaterialDesignTextField"
             app:startIconDrawable="@drawable/ic_job_title"
             app:startIconTint="@color/blue"
@@ -125,10 +174,11 @@
             android:hint="Job Description"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="20dp"
             android:inputType="textMultiLine"
             android:textSize="14sp"
+            app:counterEnabled="true"
             style="@style/CustomMaterialDesignTextField"
             app:startIconDrawable="@drawable/ic_job_desc"
             app:startIconTint="@color/blue"
@@ -139,7 +189,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                />
+                android:minHeight="100dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -179,6 +229,7 @@
                 android:button="@android:color/transparent"
                 android:background="@drawable/radio_selector_left"
                 android:paddingStart="20dp"
+                android:checked="true"
                 android:paddingEnd="20dp"
                 android:text="Full Time"
                 app:layout_constraintLeft_toLeftOf="parent"/>
@@ -300,6 +351,7 @@
             android:layout_marginTop="23dp"
             android:hint="0"
             android:gravity="center"
+            android:maxLength="5"
             android:inputType="number"
             android:textSize="20sp"
             android:layout_marginEnd="20dp"

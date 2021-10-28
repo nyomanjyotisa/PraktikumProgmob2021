@@ -52,10 +52,39 @@ public class AddJobActivity extends AppCompatActivity {
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
         getSupportActionBar().setTitle("Create a Job");
 
-        etSalary = (EditText) findViewById(R.id.salaryEditText);
         seekBarSalary = findViewById(R.id.salarySeekBar);
+        etCompanyName = findViewById(R.id.companyNameEditText);
+        etJobTitle = findViewById(R.id.jobTitleEditText);
+        etJobDesc = findViewById(R.id.jobDescEditText);
+        etLocation = findViewById(R.id.locationEditText);
+        etSalary = findViewById(R.id.salaryEditText);
 
+        Integer companyNameLimit = 30;
+        Integer jobTitleLimit = 50;
+        Integer jobDescLimit = 1000;
+        Integer locationLimit = 15;
 
+        onEditValidationInput(etCompanyName, companyNameLimit);
+        onEditValidationInput(etJobTitle, jobTitleLimit);
+        onEditValidationInput(etJobDesc, jobDescLimit);
+        onEditValidationInput(etLocation, locationLimit);
+
+        etCompanyName.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         etSalary.addTextChangedListener(new TextWatcher() {
             @Override
@@ -145,7 +174,28 @@ public class AddJobActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog(benefits);
+
+//
+//
+//
+//
+                boolean valid = true;
+
+
+                if(!onSubmitValidationInput(etCompanyName, companyNameLimit))
+                    valid = false;
+
+                if(!onSubmitValidationInput(etJobTitle, jobTitleLimit))
+                    valid = false;
+
+                if(!onSubmitValidationInput(etJobDesc, jobDescLimit))
+                    valid = false;
+
+                if(!onSubmitValidationInput(etLocation, locationLimit))
+                    valid = false;
+
+                if(valid)
+                    showDialog(benefits);
             }
         });
     }
@@ -185,7 +235,11 @@ public class AddJobActivity extends AppCompatActivity {
         tvJobTitle.setText(etJobTitle.getEditText().getText().toString());
         tvJobDesc.setText(etJobDesc.getEditText().getText().toString());
         tvLocation.setText(etLocation.getEditText().getText().toString());
+
+
         Integer salary = Integer.parseInt(etSalary.getText().toString());
+
+
 //        String formattedSalary = String.format("%,d", salary);
         String formattedSalary = NumberFormat.getNumberInstance(Locale.US).format(salary);
         tvSalary.setText("Salary: $"+ formattedSalary  +"/month");
@@ -209,7 +263,46 @@ public class AddJobActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    private void onEditValidationInput(TextInputLayout editText, Integer limit){
+        editText.setCounterMaxLength(limit);
 
+        editText.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if(editText.getEditText().getText().toString().trim().length() > limit) {
+                    editText.setError("Input reach limit");
+                }else if(editText.getEditText().getText().toString().trim().length() > 0) {
+                    editText.setErrorEnabled(false);
+                    editText.getEditText().setSelection(editText.getEditText().getText().length());
+                }else{
+                    editText.setError("Required");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
+    private boolean onSubmitValidationInput(TextInputLayout editText, Integer limit) {
+        if(editText.getEditText().getText().toString().trim().isEmpty()){
+            editText.setError("Required");
+            return false;
+        }else if(editText.getEditText().getText().toString().trim().length() > limit){
+            editText.setError("Input reach limit");
+            return false;
+        }else{
+            return true;
+        }
+    }
 
 
 }

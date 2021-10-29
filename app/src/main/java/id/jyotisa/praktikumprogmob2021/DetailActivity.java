@@ -17,6 +17,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
+
 public class DetailActivity extends AppCompatActivity {
 
     AlertDialog.Builder dialog;
@@ -76,6 +79,18 @@ public class DetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
         getSupportActionBar().setTitle(companyName);
+
+        ColorGenerator generator = ColorGenerator.MATERIAL;
+        int color2 = generator.getColor(String.valueOf(companyName.charAt(0)));
+
+        TextDrawable drawable = TextDrawable.builder()
+                .beginConfig()
+                    .bold()
+                .endConfig()
+                .buildRound(String.valueOf(companyName.charAt(0)), color2);
+
+        ImageView image = (ImageView) findViewById(R.id.logo);
+        image.setImageDrawable(drawable);
 
         tvJobTitle = (TextView) findViewById(R.id.jobName);
         tvJobDesc = (TextView) findViewById(R.id.jobDesc);

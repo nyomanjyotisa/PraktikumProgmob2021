@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
@@ -20,6 +21,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.DecimalFormat;
@@ -242,6 +245,18 @@ public class AddJobActivity extends AppCompatActivity {
         tvJobTitle.setText(etJobTitle.getEditText().getText().toString());
         tvJobDesc.setText(etJobDesc.getEditText().getText().toString());
         tvLocation.setText(etLocation.getEditText().getText().toString());
+
+        ColorGenerator generator = ColorGenerator.MATERIAL;
+        int color2 = generator.getColor(String.valueOf(etCompanyName.getEditText().getText().toString().charAt(0)));
+
+        TextDrawable drawable = TextDrawable.builder()
+                .beginConfig()
+                .bold()
+                .endConfig()
+                .buildRound(String.valueOf(etCompanyName.getEditText().getText().toString().charAt(0)), color2);
+
+        ImageView image = (ImageView) dialogView.findViewById(R.id.logo);
+        image.setImageDrawable(drawable);
 
         Integer salary;
 

@@ -16,7 +16,7 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/logo"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginTop="30dp"
@@ -40,7 +40,7 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintTop_toBottomOf="@+id/logo" />
 
         <TextView
             android:id="@+id/jobSalary"
@@ -121,7 +121,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="5dp"
-            android:text="We are looking for a Data Scientist that will help us discover the information hidden in vast amounts of data and help us make smarter decisions to deliver even better products. Your primary focus will be in applying data mining techniques, doing statistical analysis, and building high-quality prediction systems integrated with our products in DANA.\n\nWe are looking for a Data Scientist that will help us discover the information hidden in vast amounts of data and help us make smarter decisions to deliver even better products. Your primary focus will be in applying data mining techniques, doing statistical analysis, and building high-quality prediction systems integrated with our products in DANA.\n\nWe are looking for a Data Scientist that will help us discover the information hidden in vast amounts of data and help us make smarter decisions to deliver even better products. Your primary focus will be in applying data mining techniques, doing statistical analysis, and building high-quality prediction systems integrated with our products in DANA."
+            android:text="We are looking for a Data Scientist that will help us discover the information hidden in vast amounts of data and help us make smarter decisions to deliver even better products. Your primary focus will be in applying data mining techniques, doing statistical analysis, and building high-quality prediction systems integrated with our products in DANA."
             android:textSize="15sp"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -157,23 +157,6 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/benefitLabel" />
-
-        <Button
-            android:id="@+id/createButton"
-            android:text="Create Job"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="35dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/orange_background"
-            android:elevation="3dp"
-            android:layout_gravity="center_horizontal"
-            app:layout_constraintTop_toBottomOf="@id/benefits"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

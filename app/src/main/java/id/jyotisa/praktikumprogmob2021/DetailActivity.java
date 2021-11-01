@@ -1,11 +1,15 @@
 package id.jyotisa.praktikumprogmob2021;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -14,11 +18,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
+
+import java.util.zip.Inflater;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -76,9 +84,17 @@ public class DetailActivity extends AppCompatActivity {
         String salary = intent.getStringExtra(AddJobActivity.SALARY);
         String benefit = intent.getStringExtra(AddJobActivity.BENEFIT);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
+        LayoutInflater layoutInflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.title_format, null);
+        TextView titleActionBar = (TextView) view.findViewById(R.id.titleActionBar);
+        titleActionBar.setText(companyName);
+        titleActionBar.setGravity(Gravity.CENTER);
+
         getSupportActionBar().setTitle(companyName);
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(view);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ColorGenerator generator = ColorGenerator.MATERIAL;
         int color2 = generator.getColor(String.valueOf(companyName.charAt(0)));
@@ -105,5 +121,12 @@ public class DetailActivity extends AppCompatActivity {
         tvJobType.setText(jobType);
         tvSalary.setText(salary);
         tvBenefits.setText(benefit);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.owner_detail_menu, menu);
+        return true;
     }
 }

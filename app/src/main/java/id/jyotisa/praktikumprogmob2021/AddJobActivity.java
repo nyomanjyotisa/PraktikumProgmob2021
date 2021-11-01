@@ -337,6 +337,4 @@ public class AddJobActivity extends AppCompatActivity {
             return true;
         }
     }
-
-
 }

@@ -28,12 +28,58 @@ import com.amulyakhare.textdrawable.util.ColorGenerator;
 
 import java.util.zip.Inflater;
 
+import id.jyotisa.praktikumprogmob2021.model.Job;
+
 public class DetailActivity extends AppCompatActivity {
 
-    AlertDialog.Builder dialog;
-    LayoutInflater inflater;
-    View dialogView;
     TextView tvJobTitle, tvJobDesc, tvLocation, tvSalary, tvJobType, tvBenefits;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setTheme(R.style.Theme_PraktikumProgmob2021);
+        setContentView(R.layout.activity_detail);
+
+        Job job = getIntent().getParcelableExtra("JOB");
+
+        LayoutInflater layoutInflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.title_format, null);
+        TextView titleActionBar = (TextView) view.findViewById(R.id.titleActionBar);
+        titleActionBar.setText(job.getCompanyName());
+        titleActionBar.setGravity(Gravity.CENTER);
+
+        getSupportActionBar().setTitle(job.getCompanyName());
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(view);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        ColorGenerator generator = ColorGenerator.MATERIAL;
+        int color2 = generator.getColor(String.valueOf(job.getCompanyName().charAt(0)));
+
+        TextDrawable drawable = TextDrawable.builder()
+                .beginConfig()
+                    .bold()
+                .endConfig()
+                .buildRound(String.valueOf(job.getCompanyName().charAt(0)), color2);
+
+        ImageView image = (ImageView) findViewById(R.id.logo);
+        image.setImageDrawable(drawable);
+
+        tvJobTitle = (TextView) findViewById(R.id.jobName);
+        tvJobDesc = (TextView) findViewById(R.id.jobDesc);
+        tvLocation = (TextView) findViewById(R.id.location);
+        tvSalary = (TextView) findViewById(R.id.jobSalary);
+        tvJobType = (TextView) findViewById(R.id.jobType);
+        tvBenefits = (TextView) findViewById(R.id.benefits);
+
+        tvJobTitle.setText(job.getJobTitle());
+        tvJobDesc.setText(job.getJobDesc());
+        tvLocation.setText(job.getLocation());
+        tvJobType.setText(job.getJobType());
+        tvSalary.setText("Salary: $"+ job.getSalary()  +"/month");
+        tvBenefits.setText(job.getBenefits());
+    }
 
     @Override
     protected void onRestart() {
@@ -67,60 +113,6 @@ public class DetailActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         Toast.makeText(DetailActivity.this, "Your job detail page no longer visible", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setTheme(R.style.Theme_PraktikumProgmob2021);
-        setContentView(R.layout.activity_detail);
-
-        Intent intent = getIntent();
-        String companyName = intent.getStringExtra(AddJobActivity.COMPANY_NAME);
-        String jobTitle = intent.getStringExtra(AddJobActivity.JOB_TITLE);
-        String jobDesc = intent.getStringExtra(AddJobActivity.JOB_DESC);
-        String location = intent.getStringExtra(AddJobActivity.LOCATION);
-        String jobType = intent.getStringExtra(AddJobActivity.JOB_TYPE);
-        String salary = intent.getStringExtra(AddJobActivity.SALARY);
-        String benefit = intent.getStringExtra(AddJobActivity.BENEFIT);
-
-        LayoutInflater layoutInflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.title_format, null);
-        TextView titleActionBar = (TextView) view.findViewById(R.id.titleActionBar);
-        titleActionBar.setText(companyName);
-        titleActionBar.setGravity(Gravity.CENTER);
-
-        getSupportActionBar().setTitle(companyName);
-        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setCustomView(view);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        ColorGenerator generator = ColorGenerator.MATERIAL;
-        int color2 = generator.getColor(String.valueOf(companyName.charAt(0)));
-
-        TextDrawable drawable = TextDrawable.builder()
-                .beginConfig()
-                    .bold()
-                .endConfig()
-                .buildRound(String.valueOf(companyName.charAt(0)), color2);
-
-        ImageView image = (ImageView) findViewById(R.id.logo);
-        image.setImageDrawable(drawable);
-
-        tvJobTitle = (TextView) findViewById(R.id.jobName);
-        tvJobDesc = (TextView) findViewById(R.id.jobDesc);
-        tvLocation = (TextView) findViewById(R.id.location);
-        tvSalary = (TextView) findViewById(R.id.jobSalary);
-        tvJobType = (TextView) findViewById(R.id.jobType);
-        tvBenefits = (TextView) findViewById(R.id.benefits);
-
-        tvJobTitle.setText(jobTitle);
-        tvJobDesc.setText(jobDesc);
-        tvLocation.setText(location);
-        tvJobType.setText(jobType);
-        tvSalary.setText(salary);
-        tvBenefits.setText(benefit);
     }
 
     @Override

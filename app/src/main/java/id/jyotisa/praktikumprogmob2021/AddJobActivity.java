@@ -30,15 +30,10 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import id.jyotisa.praktikumprogmob2021.model.Job;
+
 public class AddJobActivity extends AppCompatActivity {
 
-    public final static String COMPANY_NAME = "id.jyotisa.praktikumprogmob2021.COMPANY_NAME";
-    public final static String JOB_TITLE = "id.jyotisa.praktikumprogmob2021.JOB_TITLE";
-    public final static String JOB_DESC = "id.jyotisa.praktikumprogmob2021.JOB_DESC";
-    public final static String LOCATION = "id.jyotisa.praktikumprogmob2021.LOCATION";
-    public final static String JOB_TYPE = "id.jyotisa.praktikumprogmob2021.JOB_TYPE";
-    public final static String SALARY = "id.jyotisa.praktikumprogmob2021.SALARY";
-    public final static String BENEFIT = "id.jyotisa.praktikumprogmob2021.BENEFIT";
     private Button btnSubmit;
     AlertDialog.Builder dialog;
     LayoutInflater inflater;
@@ -184,14 +179,7 @@ public class AddJobActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-//
-//
-//
-//
                 boolean valid = true;
-
-
                 if(!onSubmitValidationInput(etCompanyName, companyNameLimit))
                     valid = false;
 
@@ -265,7 +253,7 @@ public class AddJobActivity extends AppCompatActivity {
         }else{
             salary = Integer.parseInt(etSalary.getText().toString());
         }
-//        String formattedSalary = String.format("%,d", salary);
+
         String formattedSalary = NumberFormat.getNumberInstance(Locale.US).format(salary);
         tvSalary.setText("Salary: $"+ formattedSalary  +"/month");
         tvJobType.setText(radioButtonJobType.getText());
@@ -274,15 +262,11 @@ public class AddJobActivity extends AppCompatActivity {
         dialog.setPositiveButton("POST", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                Job job = new Job(etCompanyName.getEditText().getText().toString(), etJobTitle.getEditText().getText().toString(),
+                        etJobDesc.getEditText().getText().toString(), etLocation.getEditText().getText().toString(),
+                        radioButtonJobType.getText().toString(), formattedSalary, stringBenefits.toString());
                 Intent intent = new Intent(AddJobActivity.this, DetailActivity.class);
-                intent.putExtra(COMPANY_NAME, etCompanyName.getEditText().getText().toString());
-                intent.putExtra(JOB_TITLE, etJobTitle.getEditText().getText().toString());
-                intent.putExtra(JOB_DESC, etJobDesc.getEditText().getText().toString());
-                intent.putExtra(LOCATION, etLocation.getEditText().getText().toString());
-                intent.putExtra(JOB_TYPE, radioButtonJobType.getText());
-                intent.putExtra(SALARY, "Salary: $"+ formattedSalary  +"/month");
-                intent.putExtra(BENEFIT, stringBenefits.toString());
-
+                intent.putExtra("JOB", job);
                 startActivity(intent);
             }
         });

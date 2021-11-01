@@ -1,5 +1,6 @@
-package id.jyotisa.praktikumprogmob2021;
+package id.jyotisa.praktikumprogmob2021.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,13 +8,17 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import id.jyotisa.praktikumprogmob2021.AddJobActivity;
+import id.jyotisa.praktikumprogmob2021.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ExploreFragment#newInstance} factory method to
+ * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ExploreFragment extends Fragment {
+public class HomeFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +29,7 @@ public class ExploreFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ExploreFragment() {
+    public HomeFragment() {
         // Required empty public constructor
     }
 
@@ -34,11 +39,11 @@ public class ExploreFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ExploreFragment.
+     * @return A new instance of fragment HomeFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ExploreFragment newInstance(String param1, String param2) {
-        ExploreFragment fragment = new ExploreFragment();
+    public static HomeFragment newInstance(String param1, String param2) {
+        HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +64,16 @@ public class ExploreFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_explore, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+
+        Button btnCreate = (Button) rootView.findViewById(R.id.createButton);
+
+        btnCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), AddJobActivity.class));
+            }
+        });
+        return rootView;
     }
 }

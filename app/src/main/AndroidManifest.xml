@@ -9,13 +9,13 @@
         android:roundIcon="@mipmap/logo_round"
         android:supportsRtl="true"
         android:theme="@style/SplashTheme">
-        <activity android:name=".LoginActivity">
+        <activity android:name=".auth.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignupActivity"></activity>
+        <activity android:name=".auth.SignupActivity"></activity>
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".AddJobActivity"></activity>
         <activity android:name=".DetailActivity"></activity>

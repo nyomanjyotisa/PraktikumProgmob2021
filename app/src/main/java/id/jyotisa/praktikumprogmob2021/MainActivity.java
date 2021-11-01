@@ -3,13 +3,13 @@ package id.jyotisa.praktikumprogmob2021;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
+
+import id.jyotisa.praktikumprogmob2021.fragments.ExploreFragment;
+import id.jyotisa.praktikumprogmob2021.fragments.HomeFragment;
+import id.jyotisa.praktikumprogmob2021.fragments.NewFragment;
 
 public class MainActivity extends AppCompatActivity {
 

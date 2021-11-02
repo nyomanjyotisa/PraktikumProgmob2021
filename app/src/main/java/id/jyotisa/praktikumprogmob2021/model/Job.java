@@ -4,9 +4,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Job implements Parcelable {
-    String companyName, jobTitle, jobDesc, country, jobType, salary, benefits;
+    String companyName, jobTitle, jobDesc, country, jobType, benefits;
+    Integer salary;
 
-    public Job(String companyName, String jobTitle, String jobDesc, String country, String jobType, String salary, String benefits){
+    public Job(String companyName, String jobTitle, String jobDesc, String country, String jobType, Integer salary, String benefits){
         this.companyName = companyName;
         this.jobTitle = jobTitle;
         this.jobDesc = jobDesc;
@@ -21,7 +22,7 @@ public class Job implements Parcelable {
     public String getJobDesc() { return jobDesc; }
     public String getCountry() { return country; }
     public String getJobType() { return jobType; }
-    public String getSalary() { return salary; }
+    public Integer getSalary() { return salary; }
     public String getBenefits() { return benefits; }
 
     @Override
@@ -36,7 +37,7 @@ public class Job implements Parcelable {
         dest.writeString(this.jobDesc);
         dest.writeString(this.country);
         dest.writeString(this.jobType);
-        dest.writeString(this.salary);
+        dest.writeInt(this.salary);
         dest.writeString(this.benefits);
     }
 
@@ -46,7 +47,7 @@ public class Job implements Parcelable {
         jobDesc = in.readString();
         country = in.readString();
         jobType = in.readString();
-        salary = in.readString();
+        salary = in.readInt();
         benefits = in.readString();
     }
 

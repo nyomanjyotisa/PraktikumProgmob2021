@@ -36,7 +36,7 @@ import id.jyotisa.praktikumprogmob2021.model.Job;
 
 public class AddJobActivity extends AppCompatActivity {
 
-    private Button btnSubmit;
+    private Button btnSubmit, btnPost;
     private AlertDialog.Builder dialog;
     private LayoutInflater inflater;
     private View dialogView;
@@ -101,7 +101,7 @@ public class AddJobActivity extends AppCompatActivity {
             stringBenefits.append(" - "+s).append("\n");
 
         //set format for salary
-        int salary;
+        Integer salary;
         if(etSalary.getText().toString().isEmpty()){
             salary = 0;
         }else{
@@ -113,6 +113,9 @@ public class AddJobActivity extends AppCompatActivity {
         radioJobType = findViewById(R.id.jobTypeRadio);
         int selectedId = radioJobType.getCheckedRadioButtonId();
         radioButtonJobType = (RadioButton) findViewById(selectedId);
+
+        btnPost = (Button) dialogView.findViewById(R.id.postButton);
+        btnPost.setVisibility(View.INVISIBLE);
 
         tvCompanyName = (TextView) dialogView.findViewById(R.id.companyName);
         tvJobTitle = (TextView) dialogView.findViewById(R.id.jobName);
@@ -132,7 +135,7 @@ public class AddJobActivity extends AppCompatActivity {
 
         setTextDrawable(etCompanyName.getEditText().getText().toString(), dialogView);
 
-        dialog.setPositiveButton("POST", new DialogInterface.OnClickListener() {
+        dialog.setPositiveButton("SUBMIT", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Job job = new Job(etCompanyName.getEditText().getText().toString(),
@@ -140,7 +143,7 @@ public class AddJobActivity extends AppCompatActivity {
                         etJobDesc.getEditText().getText().toString(),
                         etCountry.getEditText().getText().toString(),
                         radioButtonJobType.getText().toString(),
-                        formattedSalary,
+                        salary,
                         stringBenefits.toString());
                 Intent intent = new Intent(AddJobActivity.this, DetailActivity.class);
                 intent.putExtra("JOB", job);

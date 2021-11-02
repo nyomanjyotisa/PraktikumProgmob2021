@@ -1,13 +1,10 @@
 package id.jyotisa.praktikumprogmob2021;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,22 +17,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 
-import java.util.zip.Inflater;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 import es.dmoral.toasty.Toasty;
-import id.jyotisa.praktikumprogmob2021.helper.CompanyTextDrawable;
+import id.jyotisa.praktikumprogmob2021.helper.DBHelper;
 import id.jyotisa.praktikumprogmob2021.model.Job;
 
 public class DetailActivity extends AppCompatActivity {
     TextView tvJobTitle, tvJobDesc, tvLocation, tvSalary, tvJobType, tvBenefits, tvCompanyName;
+    Button btnPost;
+    Job job;
+    protected Cursor cursor;
+    DBHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +43,7 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         setCustomActionBar();
 
-        Job job = getIntent().getParcelableExtra("JOB");
+        job = getIntent().getParcelableExtra("JOB");
 
         tvCompanyName = (TextView) findViewById(R.id.companyName);
         tvJobTitle = (TextView) findViewById(R.id.jobName);
@@ -59,10 +58,20 @@ public class DetailActivity extends AppCompatActivity {
         tvJobDesc.setText(job.getJobDesc());
         tvLocation.setText(job.getCountry());
         tvJobType.setText(job.getJobType());
-        tvSalary.setText("Salary: $"+ job.getSalary()  +"/month");
+        tvSalary.setText("Salary: $"+ NumberFormat.getNumberInstance(Locale.US).format(job.getSalary())+"/month");
         tvBenefits.setText(job.getBenefits());
 
         setTextDrawable(job.getCompanyName());
+
+        btnPost = (Button) findViewById(R.id.postButton);
+        btnPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveDataToDB();
+                startActivity(new Intent(DetailActivity.this, ListActivity.class));
+                Toasty.success(DetailActivity.this, "Data saved", Toast.LENGTH_SHORT, true).show();
+            }
+        });
     }
 
     @Override
@@ -141,5 +150,10 @@ public class DetailActivity extends AppCompatActivity {
         Intent intent = new Intent(DetailActivity.this, AddJobActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private void saveDataToDB(){
+        db = new DBHelper(this);
+        db.insertJob(job.getCompanyName(), job.getCountry(), job.getJobTitle(), job.getJobDesc(), job.getJobType(), job.getBenefits(), job.getSalary());
     }
 }

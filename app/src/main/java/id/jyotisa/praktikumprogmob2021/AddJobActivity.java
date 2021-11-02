@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -18,6 +19,8 @@ import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -88,7 +91,7 @@ public class AddJobActivity extends AppCompatActivity {
     private void showDialog(ArrayList<String> benefits){
         dialog = new AlertDialog.Builder(AddJobActivity.this);
         inflater = getLayoutInflater();
-        dialogView = inflater.inflate(R.layout.form_data, null);
+        dialogView = inflater.inflate(R.layout.activity_detail, null);
         dialog.setView(dialogView);
         dialog.setTitle("Job Preview");
 
@@ -106,7 +109,7 @@ public class AddJobActivity extends AppCompatActivity {
         }
         formattedSalary = NumberFormat.getNumberInstance(Locale.US).format(salary);
 
-        //jobtype
+        //job type
         radioJobType = findViewById(R.id.jobTypeRadio);
         int selectedId = radioJobType.getCheckedRadioButtonId();
         radioButtonJobType = (RadioButton) findViewById(selectedId);
@@ -132,9 +135,13 @@ public class AddJobActivity extends AppCompatActivity {
         dialog.setPositiveButton("POST", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Job job = new Job(etCompanyName.getEditText().getText().toString(), etJobTitle.getEditText().getText().toString(),
-                        etJobDesc.getEditText().getText().toString(), etLocation.getEditText().getText().toString(),
-                        radioButtonJobType.getText().toString(), formattedSalary, stringBenefits.toString());
+                Job job = new Job(etCompanyName.getEditText().getText().toString(),
+                        etJobTitle.getEditText().getText().toString(),
+                        etJobDesc.getEditText().getText().toString(),
+                        etLocation.getEditText().getText().toString(),
+                        radioButtonJobType.getText().toString(),
+                        formattedSalary,
+                        stringBenefits.toString());
                 Intent intent = new Intent(AddJobActivity.this, DetailActivity.class);
                 intent.putExtra("JOB", job);
                 startActivity(intent);
@@ -323,5 +330,23 @@ public class AddJobActivity extends AppCompatActivity {
 
         ImageView image = (ImageView) view.findViewById(R.id.logo);
         image.setImageDrawable(drawable);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(AddJobActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

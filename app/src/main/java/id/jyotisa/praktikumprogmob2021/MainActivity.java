@@ -7,9 +7,9 @@ import android.os.Bundle;
 
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
-import id.jyotisa.praktikumprogmob2021.fragments.ExploreFragment;
-import id.jyotisa.praktikumprogmob2021.fragments.HomeFragment;
-import id.jyotisa.praktikumprogmob2021.fragments.NewFragment;
+import id.jyotisa.praktikumprogmob2021.fragment.ExploreFragment;
+import id.jyotisa.praktikumprogmob2021.fragment.HomeFragment;
+import id.jyotisa.praktikumprogmob2021.fragment.NewFragment;
 
 public class MainActivity extends AppCompatActivity {
 

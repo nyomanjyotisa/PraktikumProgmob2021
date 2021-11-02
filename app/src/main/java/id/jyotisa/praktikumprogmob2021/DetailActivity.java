@@ -57,7 +57,7 @@ public class DetailActivity extends AppCompatActivity {
         tvCompanyName.setText(job.getCompanyName());
         tvJobTitle.setText(job.getJobTitle());
         tvJobDesc.setText(job.getJobDesc());
-        tvLocation.setText(job.getLocation());
+        tvLocation.setText(job.getCountry());
         tvJobType.setText(job.getJobType());
         tvSalary.setText("Salary: $"+ job.getSalary()  +"/month");
         tvBenefits.setText(job.getBenefits());

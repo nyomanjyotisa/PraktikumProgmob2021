@@ -40,10 +40,10 @@ public class AddJobActivity extends AppCompatActivity {
     private AlertDialog.Builder dialog;
     private LayoutInflater inflater;
     private View dialogView;
-    private TextInputLayout etCompanyName, etJobTitle, etJobDesc, etLocation;
+    private TextInputLayout etCompanyName, etJobTitle, etJobDesc, etCountry;
     private EditText etSalary;
     private ArrayList<String> benefits;
-    private TextView tvCompanyName, tvJobTitle, tvJobDesc, tvLocation, tvSalary, tvJobType, tvBenefits;
+    private TextView tvCompanyName, tvJobTitle, tvJobDesc, tvCountry, tvSalary, tvJobType, tvBenefits;
     private RadioGroup radioJobType;
     private CheckBox benefit1, benefit2, benefit3, benefit4;
     private RadioButton radioButtonJobType;
@@ -62,7 +62,7 @@ public class AddJobActivity extends AppCompatActivity {
         etCompanyName = findViewById(R.id.companyNameEditText);
         etJobTitle = findViewById(R.id.jobTitleEditText);
         etJobDesc = findViewById(R.id.jobDescEditText);
-        etLocation = findViewById(R.id.locationEditText);
+        etCountry = findViewById(R.id.countryEditText);
         etSalary = findViewById(R.id.salaryEditText);
 
         formValidation("onEdit");
@@ -117,7 +117,7 @@ public class AddJobActivity extends AppCompatActivity {
         tvCompanyName = (TextView) dialogView.findViewById(R.id.companyName);
         tvJobTitle = (TextView) dialogView.findViewById(R.id.jobName);
         tvJobDesc = (TextView) dialogView.findViewById(R.id.jobDesc);
-        tvLocation = (TextView) dialogView.findViewById(R.id.location);
+        tvCountry = (TextView) dialogView.findViewById(R.id.location);
         tvSalary = (TextView) dialogView.findViewById(R.id.jobSalary);
         tvJobType = (TextView) dialogView.findViewById(R.id.jobType);
         tvBenefits = (TextView) dialogView.findViewById(R.id.benefits);
@@ -125,7 +125,7 @@ public class AddJobActivity extends AppCompatActivity {
         tvCompanyName.setText(etCompanyName.getEditText().getText().toString());
         tvJobTitle.setText(etJobTitle.getEditText().getText().toString());
         tvJobDesc.setText(etJobDesc.getEditText().getText().toString());
-        tvLocation.setText(etLocation.getEditText().getText().toString());
+        tvCountry.setText(etCountry.getEditText().getText().toString());
         tvSalary.setText("Salary: $"+ formattedSalary  +"/month");
         tvJobType.setText(radioButtonJobType.getText());
         tvBenefits.setText(stringBenefits);
@@ -138,7 +138,7 @@ public class AddJobActivity extends AppCompatActivity {
                 Job job = new Job(etCompanyName.getEditText().getText().toString(),
                         etJobTitle.getEditText().getText().toString(),
                         etJobDesc.getEditText().getText().toString(),
-                        etLocation.getEditText().getText().toString(),
+                        etCountry.getEditText().getText().toString(),
                         radioButtonJobType.getText().toString(),
                         formattedSalary,
                         stringBenefits.toString());
@@ -290,7 +290,7 @@ public class AddJobActivity extends AppCompatActivity {
             onEditValidationInput(etCompanyName, companyNameLimit);
             onEditValidationInput(etJobTitle, jobTitleLimit);
             onEditValidationInput(etJobDesc, jobDescLimit);
-            onEditValidationInput(etLocation, locationLimit);
+            onEditValidationInput(etCountry, locationLimit);
         }else if(when.equals("onSubmit")){
             boolean valid = true;
             if(!onSubmitValidationInput(etCompanyName, companyNameLimit))
@@ -302,7 +302,7 @@ public class AddJobActivity extends AppCompatActivity {
             if(!onSubmitValidationInput(etJobDesc, jobDescLimit))
                 valid = false;
 
-            if(!onSubmitValidationInput(etLocation, locationLimit))
+            if(!onSubmitValidationInput(etCountry, locationLimit))
                 valid = false;
 
             if(!valid)

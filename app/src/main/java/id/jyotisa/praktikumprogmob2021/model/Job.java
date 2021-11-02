@@ -4,13 +4,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Job implements Parcelable {
-    String companyName, jobTitle, jobDesc, location, jobType, salary, benefits;
+    String companyName, jobTitle, jobDesc, country, jobType, salary, benefits;
 
-    public Job(String companyName, String jobTitle, String jobDesc, String location, String jobType, String salary, String benefits){
+    public Job(String companyName, String jobTitle, String jobDesc, String country, String jobType, String salary, String benefits){
         this.companyName = companyName;
         this.jobTitle = jobTitle;
         this.jobDesc = jobDesc;
-        this.location = location;
+        this.country = country;
         this.jobType = jobType;
         this.salary = salary;
         this.benefits = benefits;
@@ -19,7 +19,7 @@ public class Job implements Parcelable {
     public String getCompanyName() { return companyName; }
     public String getJobTitle() { return jobTitle; }
     public String getJobDesc() { return jobDesc; }
-    public String getLocation() { return location; }
+    public String getCountry() { return country; }
     public String getJobType() { return jobType; }
     public String getSalary() { return salary; }
     public String getBenefits() { return benefits; }
@@ -34,7 +34,7 @@ public class Job implements Parcelable {
         dest.writeString(this.companyName);
         dest.writeString(this.jobTitle);
         dest.writeString(this.jobDesc);
-        dest.writeString(this.location);
+        dest.writeString(this.country);
         dest.writeString(this.jobType);
         dest.writeString(this.salary);
         dest.writeString(this.benefits);
@@ -44,7 +44,7 @@ public class Job implements Parcelable {
         companyName = in.readString();
         jobTitle = in.readString();
         jobDesc = in.readString();
-        location = in.readString();
+        country = in.readString();
         jobType = in.readString();
         salary = in.readString();
         benefits = in.readString();

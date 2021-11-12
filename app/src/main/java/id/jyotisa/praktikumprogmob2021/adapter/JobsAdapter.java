@@ -1,6 +1,7 @@
 package id.jyotisa.praktikumprogmob2021.adapter;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,14 +21,14 @@ import id.jyotisa.praktikumprogmob2021.model.Job;
 
 public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.ViewHolder>{
 
-    ArrayList<Job> data;
+    ArrayList<Job> jobHolder = new ArrayList<>();
+    Context context;
     private OnEditListener onEditListener;
     private OnDeleteListener onDeleteListener;
 
-    public JobsAdapter(ArrayList<Job> data, OnEditListener onEditListener, OnDeleteListener onDeleteListener){
-        this.data = data;
-        this.onEditListener = onEditListener;
-        this.onDeleteListener = onDeleteListener;
+    public JobsAdapter(ArrayList<Job> dataholder, Context context, SQLiteDatabase sqLiteDatabase) {
+        this.jobHolder = dataholder;
+        this.context = context;
     }
 
     @NonNull
@@ -46,7 +47,7 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.ViewHolder>{
 
     @Override
     public int getItemCount() {
-        return (data != null) ? data.size() : 0;
+        return (jobHolder != null) ? jobHolder.size() : 0;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

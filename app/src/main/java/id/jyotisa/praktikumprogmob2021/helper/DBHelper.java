@@ -2,6 +2,7 @@ package id.jyotisa.praktikumprogmob2021.helper;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -52,5 +53,12 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put(BENEFITS_COLUMN, benefits);
         contentValues.put(SALARY_COLUMN, salary);
         db.insert(TABLE_NAME, null, contentValues);
+    }
+
+    public Cursor readJobs() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = ("SELECT*FROM tb_job ORDER BY id DESC");
+        Cursor cursor = db.rawQuery(query, null);
+        return cursor;
     }
 }

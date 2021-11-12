@@ -20,6 +20,7 @@
         <activity android:name=".AddJobActivity"></activity>
         <activity android:name=".DetailActivity"></activity>
         <activity android:name=".ListActivity"></activity>
+        <activity android:name=".UpdateActivity"></activity>
     </application>
 
 </manifest>

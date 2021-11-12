@@ -3,6 +3,7 @@ package id.jyotisa.praktikumprogmob2021.adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,13 +15,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
+
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import id.jyotisa.praktikumprogmob2021.AddJobActivity;
+import id.jyotisa.praktikumprogmob2021.DetailActivity;
+import id.jyotisa.praktikumprogmob2021.ListActivity;
 import id.jyotisa.praktikumprogmob2021.R;
+import id.jyotisa.praktikumprogmob2021.UpdateActivity;
 import id.jyotisa.praktikumprogmob2021.helper.DBHelper;
 import id.jyotisa.praktikumprogmob2021.model.Job;
 
@@ -55,13 +63,13 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.ViewHolder>{
                 alertDialog.setTitle("Delete Confirmation");
                 alertDialog.setMessage("Are you sure to delete this job?");
                 alertDialog.setCancelable(false);
-                alertDialog.setPositiveButton("CANCEL", new DialogInterface.OnClickListener() {
+                alertDialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
                         dialog.cancel();
                     }
                 });
-                alertDialog.setNegativeButton("YES", new DialogInterface.OnClickListener() {
+                alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
                         DBHelper db = new DBHelper(context);
@@ -78,6 +86,32 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.ViewHolder>{
                 dialog.show();
             }
         });
+
+        holder.edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Job job = new Job(jobHolder.get(position).getCompanyName(),
+                        jobHolder.get(position).getJobTitle(),
+                        jobHolder.get(position).getJobDesc(),
+                        jobHolder.get(position).getCountry(),
+                        jobHolder.get(position).getJobType(),
+                        jobHolder.get(position).getSalary(),
+                        jobHolder.get(position).getBenefits(),
+                        jobHolder.get(position).getId());
+                Intent intent = new Intent(context, UpdateActivity.class);
+                intent.putExtra("JOB", job);
+                context.startActivity(intent);
+            }
+        });
+
+        ColorGenerator generator = ColorGenerator.MATERIAL;
+        int color2 = generator.getColor(String.valueOf(jobHolder.get(position).getCompanyName().charAt(0)));
+        TextDrawable drawable = TextDrawable.builder()
+                .beginConfig()
+                .bold()
+                .endConfig()
+                .buildRound(String.valueOf(jobHolder.get(position).getCompanyName().charAt(0)), color2);
+        holder.logo.setImageDrawable(drawable);
     }
 
     @Override
@@ -87,7 +121,7 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.ViewHolder>{
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView jobTitle, country, companyName, salary;
-        ImageView delete, edit;
+        ImageView delete, edit, logo;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -97,6 +131,21 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.ViewHolder>{
             salary = (TextView) itemView.findViewById(R.id.salary);
             edit = (ImageView) itemView.findViewById(R.id.edit);
             delete = (ImageView) itemView.findViewById(R.id.delete);
+            logo = (ImageView) itemView.findViewById(R.id.heroLeft);
         }
+    }
+
+    private void setTextDrawable(String companyName, View view){
+        ColorGenerator generator = ColorGenerator.MATERIAL;
+        int color2 = generator.getColor(String.valueOf(companyName.charAt(0)));
+
+        TextDrawable drawable = TextDrawable.builder()
+                .beginConfig()
+                .bold()
+                .endConfig()
+                .buildRound(String.valueOf(companyName.charAt(0)), color2);
+
+        ImageView image = (ImageView) view.findViewById(R.id.heroLeft);
+        image.setImageDrawable(drawable);
     }
 }

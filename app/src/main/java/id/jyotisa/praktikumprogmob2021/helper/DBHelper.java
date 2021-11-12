@@ -61,4 +61,9 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
         return cursor;
     }
+
+    public void deleteData(String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM tb_job WHERE id='" + id + "'");
+    }
 }

@@ -5,9 +5,9 @@ import android.os.Parcelable;
 
 public class Job implements Parcelable {
     String companyName, jobTitle, jobDesc, country, jobType, benefits;
-    Integer salary;
+    Integer salary, id;
 
-    public Job(String companyName, String jobTitle, String jobDesc, String country, String jobType, Integer salary, String benefits){
+    public Job(String companyName, String jobTitle, String jobDesc, String country, String jobType, Integer salary, String benefits, Integer id){
         this.companyName = companyName;
         this.jobTitle = jobTitle;
         this.jobDesc = jobDesc;
@@ -15,6 +15,7 @@ public class Job implements Parcelable {
         this.jobType = jobType;
         this.salary = salary;
         this.benefits = benefits;
+        this.id = id;
     }
 
     public String getCompanyName() { return companyName; }
@@ -24,6 +25,7 @@ public class Job implements Parcelable {
     public String getJobType() { return jobType; }
     public Integer getSalary() { return salary; }
     public String getBenefits() { return benefits; }
+    public Integer getId() { return id; }
 
     @Override
     public int describeContents() {

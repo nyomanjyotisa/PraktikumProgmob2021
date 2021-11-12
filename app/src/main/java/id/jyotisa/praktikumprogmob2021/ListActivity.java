@@ -16,7 +16,7 @@ import id.jyotisa.praktikumprogmob2021.adapter.JobsAdapter;
 import id.jyotisa.praktikumprogmob2021.helper.DBHelper;
 import id.jyotisa.praktikumprogmob2021.model.Job;
 
-public class ListActivity extends AppCompatActivity implements JobsAdapter.OnEditListener, JobsAdapter.OnDeleteListener{
+public class ListActivity extends AppCompatActivity {
 
 
     RecyclerView recyclerView;
@@ -37,21 +37,11 @@ public class ListActivity extends AppCompatActivity implements JobsAdapter.OnEdi
         Cursor cursor = new DBHelper(this).readJobs();
 
         while(cursor.moveToNext()){
-            Job obj = new Job(cursor.getString(1), cursor.getString(3), cursor.getString(4), cursor.getString(2), cursor.getString(5), cursor.getInt(7), cursor.getString(6));
+            Job obj = new Job(cursor.getString(1), cursor.getString(3), cursor.getString(4), cursor.getString(2), cursor.getString(5), cursor.getInt(7), cursor.getString(6), cursor.getInt(0));
             jobHolder.add(obj);
         }
 
         JobsAdapter adapter = new  JobsAdapter(jobHolder, ListActivity.this, sqLiteDatabase);
         recyclerView.setAdapter((RecyclerView.Adapter) adapter);
-    }
-
-    @Override
-    public void onEditClick(Job job) {
-
-    }
-
-    @Override
-    public void onDeleteClick(Job job) {
-
     }
 }

@@ -1,6 +1,8 @@
 package id.jyotisa.praktikumprogmob2021.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,14 +21,13 @@ import java.util.List;
 import java.util.Locale;
 
 import id.jyotisa.praktikumprogmob2021.R;
+import id.jyotisa.praktikumprogmob2021.helper.DBHelper;
 import id.jyotisa.praktikumprogmob2021.model.Job;
 
 public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.ViewHolder>{
 
     ArrayList<Job> jobHolder = new ArrayList<>();
     Context context;
-    private OnEditListener onEditListener;
-    private OnDeleteListener onDeleteListener;
 
     public JobsAdapter(ArrayList<Job> jobHolder, Context context, SQLiteDatabase sqLiteDatabase) {
         this.jobHolder = jobHolder;
@@ -46,6 +47,37 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.ViewHolder>{
         holder.country.setText(jobHolder.get(position).getCountry());
         holder.jobTitle.setText(jobHolder.get(position).getJobTitle());
         holder.salary.setText("Salary: $" + NumberFormat.getNumberInstance(Locale.US).format(jobHolder.get(position).getSalary()) + "/month");
+
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+                alertDialog.setTitle("Delete Confirmation");
+                alertDialog.setMessage("Are you sure to delete this job?");
+                alertDialog.setCancelable(false);
+                alertDialog.setPositiveButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        dialog.cancel();
+                    }
+                });
+                alertDialog.setNegativeButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        DBHelper db = new DBHelper(context);
+                        db.deleteData(jobHolder.get(position).getId().toString());
+
+                        jobHolder.remove(position);
+                        notifyItemRemoved(position);
+                        notifyItemRangeChanged(position, jobHolder.size());
+                        notifyDataSetChanged();
+                    }
+                });
+
+                AlertDialog dialog = alertDialog.create();
+                dialog.show();
+            }
+        });
     }
 
     @Override
@@ -55,7 +87,7 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.ViewHolder>{
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView jobTitle, country, companyName, salary;
-        Button btnDelete, btnEdit;
+        ImageView delete, edit;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -63,14 +95,8 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.ViewHolder>{
             country = (TextView) itemView.findViewById(R.id.country);
             companyName = (TextView) itemView.findViewById(R.id.companyName);
             salary = (TextView) itemView.findViewById(R.id.salary);
+            edit = (ImageView) itemView.findViewById(R.id.edit);
+            delete = (ImageView) itemView.findViewById(R.id.delete);
         }
-    }
-
-    public interface OnEditListener{
-        void onEditClick(Job job);
-    }
-
-    public interface OnDeleteListener{
-        void onDeleteClick(Job job);
     }
 }

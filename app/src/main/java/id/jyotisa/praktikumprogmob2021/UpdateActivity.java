@@ -1,5 +1,6 @@
 package id.jyotisa.praktikumprogmob2021;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -27,11 +28,14 @@ import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import es.dmoral.toasty.Toasty;
 import id.jyotisa.praktikumprogmob2021.fragment.NewFragment;
+import id.jyotisa.praktikumprogmob2021.helper.DBHelper;
 import id.jyotisa.praktikumprogmob2021.model.Job;
 
 public class UpdateActivity extends AppCompatActivity {
@@ -50,6 +54,7 @@ public class UpdateActivity extends AppCompatActivity {
     private String formattedSalary;
     private StringBuilder stringBenefits;
     Job job;
+    DBHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +111,7 @@ public class UpdateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(formValidation("onSubmit")){
-
+                    btnUpdate(benefits);
                 }else{
                     Toasty.error(UpdateActivity.this, "Some fields contain error", Toast.LENGTH_SHORT, true).show();
                 }
@@ -290,5 +295,36 @@ public class UpdateActivity extends AppCompatActivity {
         Intent intent = new Intent(UpdateActivity.this, ListActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private void btnUpdate(ArrayList<String> benefits){
+        //benefits array to string
+        stringBenefits = new StringBuilder();
+        for (String s : benefits)
+            stringBenefits.append(" - "+s).append("\n");
+
+        //set format for salary
+        Integer salary;
+        if(etSalary.getText().toString().isEmpty()){
+            salary = 0;
+        }else{
+            salary = Integer.parseInt(etSalary.getText().toString());
+        }
+        formattedSalary = NumberFormat.getNumberInstance(Locale.US).format(salary);
+
+        //job type
+        radioJobType = findViewById(R.id.jobTypeRadio);
+        int selectedId = radioJobType.getCheckedRadioButtonId();
+        radioButtonJobType = (RadioButton) findViewById(selectedId);
+
+        db = new DBHelper(this);
+        db.updateJob(job.getId(),
+                etCompanyName.getEditText().getText().toString(),
+                etCountry.getEditText().getText().toString(),
+                etJobTitle.getEditText().getText().toString(),
+                etJobDesc.getEditText().getText().toString(),
+                radioButtonJobType.getText().toString(),
+                stringBenefits.toString(),
+                salary);
     }
 }

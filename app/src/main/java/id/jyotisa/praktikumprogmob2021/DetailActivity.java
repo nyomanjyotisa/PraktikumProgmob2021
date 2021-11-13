@@ -212,6 +212,12 @@ public class DetailActivity extends AppCompatActivity {
 
     private void saveDataToDB(){
         db = new DBHelper(this);
-        db.insertJob(job.getCompanyName(), job.getCountry(), job.getJobTitle(), job.getJobDesc(), job.getJobType(), job.getBenefits(), job.getSalary());
+        db.insertJob(job.getCompanyName(),
+                job.getCountry(),
+                job.getJobTitle(),
+                job.getJobDesc(),
+                job.getJobType(),
+                job.getBenefits(),
+                job.getSalary());
     }
 }

@@ -2,13 +2,17 @@ package id.jyotisa.praktikumprogmob2021.helper;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import id.jyotisa.praktikumprogmob2021.ListActivity;
+
 public class DBHelper extends SQLiteOpenHelper {
+    private final Context context;
     private static final String DATABASE_NAME = "db_jobify";
     private static final int DATABASE_VERSION = 1;
     private static final String TABLE_NAME = "tb_job";
@@ -22,6 +26,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public DBHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
     }
 
     @Override
@@ -65,5 +70,21 @@ public class DBHelper extends SQLiteOpenHelper {
     public void deleteData(Integer id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM tb_job WHERE id='" + id + "'");
+    }
+
+    public void updateJob (Integer id, String companyName, String country, String jobTitle, String jobDesc, String jobType, String benefits, Integer salary){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COMPANY_NAME_COLUMN, companyName);
+        contentValues.put(COUNTRY_COLUMN, country);
+        contentValues.put(JOB_TITLE_COLUMN, jobTitle);
+        contentValues.put(JOB_DESCRIPTION_COLUMN, jobDesc);
+        contentValues.put(JOB_TYPE_COLUMN, jobType);
+        contentValues.put(BENEFITS_COLUMN, benefits);
+        contentValues.put(SALARY_COLUMN, salary);
+        db.update(TABLE_NAME, contentValues, "id" + "='" + id + "'", null);
+
+        Intent intent = new Intent(context, ListActivity.class);
+        context.startActivity(intent);
     }
 }

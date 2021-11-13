@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -94,15 +95,35 @@ public class UpdateActivity extends AppCompatActivity {
             radioJobType.check(R.id.jobType3);
         }
 
-
         benefit1 = (CheckBox)findViewById(R.id.benefit1);
         benefit2 = (CheckBox)findViewById(R.id.benefit2);
         benefit3 = (CheckBox)findViewById(R.id.benefit3);
         benefit4 = (CheckBox)findViewById(R.id.benefit4);
-
-        benefit2.setChecked(true);
-
         benefits = new ArrayList<>();
+
+        String[] benefit = job.getBenefits().split("- ");
+        if(benefit.length > 1){
+            Log.v("babi0", benefit[0]);
+            Log.v("babi1", benefit[1].replaceAll("\\s+$", ""));
+            benefit1.setChecked(true);
+            benefits.add(benefit1.getText().toString());
+        }
+        if(benefit.length > 2){
+            Log.v("babi2", benefit[2].replaceAll("\\s+$", ""));
+            benefit2.setChecked(true);
+            benefits.add(benefit2.getText().toString());
+        }
+        if(benefit.length > 3){
+            Log.v("babi3", benefit[3].replaceAll("\\s+$", ""));
+            benefit3.setChecked(true);
+            benefits.add(benefit3.getText().toString());
+        }
+        if(benefit.length > 4){
+            Log.v("babi4", benefit[4].replaceAll("\\s+$", ""));
+            benefit4.setChecked(true);
+            benefits.add(benefit4.getText().toString());
+        }
+        
         benefitOnClick();
 
         btnSubmit = (Button) findViewById(R.id.createButton);

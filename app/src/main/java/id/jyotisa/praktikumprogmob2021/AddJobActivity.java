@@ -144,9 +144,10 @@ public class AddJobActivity extends AppCompatActivity {
                         etCountry.getEditText().getText().toString(),
                         radioButtonJobType.getText().toString(),
                         salary,
-                        stringBenefits.toString(), 0);
+                        stringBenefits.toString(),0);
                 Intent intent = new Intent(AddJobActivity.this, DetailActivity.class);
                 intent.putExtra("JOB", job);
+                intent.putExtra("ORIGIN", "AddJob");
                 startActivity(intent);
             }
         });

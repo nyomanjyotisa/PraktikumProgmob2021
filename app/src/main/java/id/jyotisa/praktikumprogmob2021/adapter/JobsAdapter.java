@@ -73,7 +73,7 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.ViewHolder>{
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
                         DBHelper db = new DBHelper(context);
-                        db.deleteData(jobHolder.get(position).getId().toString());
+                        db.deleteData(jobHolder.get(position).getId());
 
                         jobHolder.remove(position);
                         notifyItemRemoved(position);
@@ -104,6 +104,24 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.ViewHolder>{
             }
         });
 
+        holder.section.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Job job = new Job(jobHolder.get(position).getCompanyName(),
+                        jobHolder.get(position).getJobTitle(),
+                        jobHolder.get(position).getJobDesc(),
+                        jobHolder.get(position).getCountry(),
+                        jobHolder.get(position).getJobType(),
+                        jobHolder.get(position).getSalary(),
+                        jobHolder.get(position).getBenefits(),
+                        jobHolder.get(position).getId());
+                Intent intent = new Intent(context, DetailActivity.class);
+                intent.putExtra("JOB", job);
+                intent.putExtra("ORIGIN", "Adapter");
+                context.startActivity(intent);
+            }
+        });
+
         ColorGenerator generator = ColorGenerator.MATERIAL;
         int color2 = generator.getColor(String.valueOf(jobHolder.get(position).getCompanyName().charAt(0)));
         TextDrawable drawable = TextDrawable.builder()
@@ -121,7 +139,7 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.ViewHolder>{
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView jobTitle, country, companyName, salary;
-        ImageView delete, edit, logo;
+        ImageView delete, edit, logo, section;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -132,6 +150,7 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.ViewHolder>{
             edit = (ImageView) itemView.findViewById(R.id.edit);
             delete = (ImageView) itemView.findViewById(R.id.delete);
             logo = (ImageView) itemView.findViewById(R.id.heroLeft);
+            section = (ImageView) itemView.findViewById(R.id.hero);
         }
     }
 

@@ -62,7 +62,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public void deleteData(String id) {
+    public void deleteData(Integer id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM tb_job WHERE id='" + id + "'");
     }

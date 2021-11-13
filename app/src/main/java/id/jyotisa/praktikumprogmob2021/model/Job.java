@@ -41,6 +41,7 @@ public class Job implements Parcelable {
         dest.writeString(this.jobType);
         dest.writeInt(this.salary);
         dest.writeString(this.benefits);
+        dest.writeInt(this.id);
     }
 
     protected Job(Parcel in) {
@@ -51,6 +52,7 @@ public class Job implements Parcelable {
         jobType = in.readString();
         salary = in.readInt();
         benefits = in.readString();
+        id = in.readInt();
     }
 
     public static final Creator<Job> CREATOR = new Creator<Job>() {

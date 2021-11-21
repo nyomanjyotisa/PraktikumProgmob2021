@@ -34,8 +34,8 @@ import id.jyotisa.praktikumprogmob2021.model.Job;
 
 public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.ViewHolder>{
 
-    ArrayList<Job> jobHolder = new ArrayList<>();
-    Context context;
+    private ArrayList<Job> jobHolder = new ArrayList<>();
+    private Context context;
 
     public JobsAdapter(ArrayList<Job> jobHolder, Context context, SQLiteDatabase sqLiteDatabase) {
         this.jobHolder = jobHolder;
@@ -99,7 +99,7 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.ViewHolder>{
                         jobHolder.get(position).getBenefits(),
                         jobHolder.get(position).getId());
                 Intent intent = new Intent(context, UpdateActivity.class);
-                intent.putExtra("JOB", job);
+                intent.putExtra(DetailActivity.JOB, job);
                 context.startActivity(intent);
             }
         });
@@ -116,8 +116,7 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.ViewHolder>{
                         jobHolder.get(position).getBenefits(),
                         jobHolder.get(position).getId());
                 Intent intent = new Intent(context, DetailActivity.class);
-                intent.putExtra("JOB", job);
-                intent.putExtra("ORIGIN", "Adapter");
+                intent.putExtra(DetailActivity.JOB, job);
                 context.startActivity(intent);
             }
         });
@@ -152,19 +151,5 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.ViewHolder>{
             logo = (ImageView) itemView.findViewById(R.id.heroLeft);
             section = (ImageView) itemView.findViewById(R.id.hero);
         }
-    }
-
-    private void setTextDrawable(String companyName, View view){
-        ColorGenerator generator = ColorGenerator.MATERIAL;
-        int color2 = generator.getColor(String.valueOf(companyName.charAt(0)));
-
-        TextDrawable drawable = TextDrawable.builder()
-                .beginConfig()
-                .bold()
-                .endConfig()
-                .buildRound(String.valueOf(companyName.charAt(0)), color2);
-
-        ImageView image = (ImageView) view.findViewById(R.id.heroLeft);
-        image.setImageDrawable(drawable);
     }
 }

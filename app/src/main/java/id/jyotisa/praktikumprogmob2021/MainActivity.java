@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
+import es.dmoral.toasty.Toasty;
 import id.jyotisa.praktikumprogmob2021.fragment.ExploreFragment;
 import id.jyotisa.praktikumprogmob2021.fragment.HomeFragment;
 import id.jyotisa.praktikumprogmob2021.fragment.NewFragment;
@@ -15,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ChipNavigationBar chipNavigationBar;
     private Fragment fragment = null;
+    private Long pressedTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,5 +53,16 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (pressedTime + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed();
+            finishAffinity();
+        } else {
+            Toasty.info(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT, true).show();
+        }
+        pressedTime = System.currentTimeMillis();
     }
 }

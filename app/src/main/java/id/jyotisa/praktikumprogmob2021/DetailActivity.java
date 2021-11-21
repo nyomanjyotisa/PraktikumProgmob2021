@@ -36,12 +36,11 @@ import id.jyotisa.praktikumprogmob2021.helper.DBHelper;
 import id.jyotisa.praktikumprogmob2021.model.Job;
 
 public class DetailActivity extends AppCompatActivity {
-    TextView tvJobTitle, tvJobDesc, tvLocation, tvSalary, tvJobType, tvBenefits, tvCompanyName;
-    Button btnPost;
-    Job job;
-    protected Cursor cursor;
-    DBHelper db;
-    Intent intent;
+    public final static String JOB = "id.jyotisa.praktikumprogmob2021.JOB";
+    private TextView tvJobTitle, tvJobDesc, tvLocation, tvSalary, tvJobType, tvBenefits, tvCompanyName;
+    private Job job;
+    private DBHelper db;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +49,7 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         setCustomActionBar();
 
-        intent = getIntent();
-        job = intent.getParcelableExtra("JOB");
+        job = getIntent().getParcelableExtra(JOB);
 
         tvCompanyName = (TextView) findViewById(R.id.companyName);
         tvJobTitle = (TextView) findViewById(R.id.jobName);
@@ -70,19 +68,6 @@ public class DetailActivity extends AppCompatActivity {
         tvBenefits.setText(job.getBenefits());
 
         setTextDrawable(job.getCompanyName());
-
-        btnPost = (Button) findViewById(R.id.postButton);
-        if(intent.getStringExtra("ORIGIN").equals("Adapter")){
-            btnPost.setVisibility(View.INVISIBLE);
-        }
-        btnPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveDataToDB();
-                startActivity(new Intent(DetailActivity.this, ListActivity.class));
-                Toasty.success(DetailActivity.this, "Data saved", Toast.LENGTH_SHORT, true).show();
-            }
-        });
     }
 
     @Override
@@ -151,52 +136,46 @@ public class DetailActivity extends AppCompatActivity {
             case android.R.id.home:
                 onBackPressed();
                 return true;
-        }
+            case R.id.edit:
+                Job jobNew = new Job(job.getCompanyName(),
+                        job.getJobTitle(),
+                        job.getJobDesc(),
+                        job.getCountry(),
+                        job.getJobType(),
+                        job.getSalary(),
+                        job.getBenefits(),
+                        job.getId());
+                Intent intent = new Intent(DetailActivity.this, UpdateActivity.class);
+                intent.putExtra("JOB", jobNew);
+                startActivity(intent);
+                return true;
+            case R.id.delete:
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetailActivity.this);
+                alertDialog.setTitle("Delete Confirmation");
+                alertDialog.setMessage("Are you sure to delete this job?");
+                alertDialog.setCancelable(false);
+                alertDialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        dialog.cancel();
+                    }
+                });
+                alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        db = new DBHelper(DetailActivity.this);
+                        db.deleteData(job.getId());
+                        Log.v("cuy", "masukkk" + job.getId());
+                        startActivity(new Intent(DetailActivity.this, ListActivity.class));
+                    }
+                });
 
-        if(intent.getStringExtra("ORIGIN").equals("Adapter")){
-            switch (item.getItemId()) {
-                case R.id.edit:
-                    Job jobNew = new Job(job.getCompanyName(),
-                            job.getJobTitle(),
-                            job.getJobDesc(),
-                            job.getCountry(),
-                            job.getJobType(),
-                            job.getSalary(),
-                            job.getBenefits(),
-                            job.getId());
-                    Intent intent = new Intent(DetailActivity.this, UpdateActivity.class);
-                    intent.putExtra("JOB", jobNew);
-                    startActivity(intent);
-                    return true;
-                case R.id.delete:
-                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetailActivity.this);
-                    alertDialog.setTitle("Delete Confirmation");
-                    alertDialog.setMessage("Are you sure to delete this job?");
-                    alertDialog.setCancelable(false);
-                    alertDialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int i) {
-                            dialog.cancel();
-                        }
-                    });
-                    alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int i) {
-                            db = new DBHelper(DetailActivity.this);
-                            db.deleteData(job.getId());
-                            Log.v("cuy", "masukkk" + job.getId());
-                            startActivity(new Intent(DetailActivity.this, ListActivity.class));
-
-                        }
-                    });
-
-                    AlertDialog dialog = alertDialog.create();
-                    dialog.show();
-                    return true;
-                case R.id.share:
-                    onBackPressed();
-                    return true;
-            }
+                AlertDialog dialog = alertDialog.create();
+                dialog.show();
+                return true;
+            case R.id.share:
+                onBackPressed();
+                return true;
         }
 
         return false;
@@ -205,19 +184,6 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(TextUtils.isEmpty(intent.getStringExtra("Adapter"))){
-            btnPost.setVisibility(View.INVISIBLE);
-        }
-    }
-
-    private void saveDataToDB(){
-        db = new DBHelper(this);
-        db.insertJob(job.getCompanyName(),
-                job.getCountry(),
-                job.getJobTitle(),
-                job.getJobDesc(),
-                job.getJobType(),
-                job.getBenefits(),
-                job.getSalary());
+        startActivity(new Intent(DetailActivity.this, ListActivity.class));
     }
 }

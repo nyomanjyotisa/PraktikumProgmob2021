@@ -54,8 +54,8 @@ public class UpdateActivity extends AppCompatActivity {
     private SeekBar seekBarSalary;
     private String formattedSalary;
     private StringBuilder stringBenefits;
-    Job job;
-    DBHelper db;
+    private Job job;
+    private DBHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +64,7 @@ public class UpdateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add);
         setCustomActionBar();
 
-        job = getIntent().getParcelableExtra("JOB");
+        job = getIntent().getParcelableExtra(DetailActivity.JOB);
 
         seekBarSalary = findViewById(R.id.salarySeekBar);
         etCompanyName = findViewById(R.id.companyNameEditText);

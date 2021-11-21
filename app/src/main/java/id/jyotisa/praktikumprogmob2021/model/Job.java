@@ -4,8 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Job implements Parcelable {
-    String companyName, jobTitle, jobDesc, country, jobType, benefits;
-    Integer salary, id;
+    private String companyName, jobTitle, jobDesc, country, jobType, benefits;
+    private Integer salary, id;
 
     public Job(String companyName, String jobTitle, String jobDesc, String country, String jobType, Integer salary, String benefits, Integer id){
         this.companyName = companyName;

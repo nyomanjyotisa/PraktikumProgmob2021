@@ -32,11 +32,12 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import es.dmoral.toasty.Toasty;
+import id.jyotisa.praktikumprogmob2021.helper.DBHelper;
 import id.jyotisa.praktikumprogmob2021.model.Job;
 
 public class AddJobActivity extends AppCompatActivity {
 
-    private Button btnSubmit, btnPost;
+    private Button btnSubmit;
     private AlertDialog.Builder dialog;
     private LayoutInflater inflater;
     private View dialogView;
@@ -50,6 +51,8 @@ public class AddJobActivity extends AppCompatActivity {
     private SeekBar seekBarSalary;
     private String formattedSalary;
     private StringBuilder stringBenefits;
+    private DBHelper db;
+    private Job job;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,9 +117,6 @@ public class AddJobActivity extends AppCompatActivity {
         int selectedId = radioJobType.getCheckedRadioButtonId();
         radioButtonJobType = (RadioButton) findViewById(selectedId);
 
-        btnPost = (Button) dialogView.findViewById(R.id.postButton);
-        btnPost.setVisibility(View.INVISIBLE);
-
         tvCompanyName = (TextView) dialogView.findViewById(R.id.companyName);
         tvJobTitle = (TextView) dialogView.findViewById(R.id.jobName);
         tvJobDesc = (TextView) dialogView.findViewById(R.id.jobDesc);
@@ -138,16 +138,18 @@ public class AddJobActivity extends AppCompatActivity {
         dialog.setPositiveButton("SUBMIT", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Job job = new Job(etCompanyName.getEditText().getText().toString(),
+                job = new Job(etCompanyName.getEditText().getText().toString(),
                         etJobTitle.getEditText().getText().toString(),
                         etJobDesc.getEditText().getText().toString(),
                         etCountry.getEditText().getText().toString(),
                         radioButtonJobType.getText().toString(),
                         salary,
                         stringBenefits.toString(),0);
+
+                saveDataToDB();
+
                 Intent intent = new Intent(AddJobActivity.this, DetailActivity.class);
-                intent.putExtra("JOB", job);
-                intent.putExtra("ORIGIN", "AddJob");
+                intent.putExtra(DetailActivity.JOB, job);
                 startActivity(intent);
             }
         });
@@ -352,5 +354,16 @@ public class AddJobActivity extends AppCompatActivity {
         Intent intent = new Intent(AddJobActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private void saveDataToDB(){
+        db = new DBHelper(this);
+        db.insertJob(job.getCompanyName(),
+                job.getCountry(),
+                job.getJobTitle(),
+                job.getJobDesc(),
+                job.getJobType(),
+                job.getBenefits(),
+                job.getSalary());
     }
 }

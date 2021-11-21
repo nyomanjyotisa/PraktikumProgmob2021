@@ -1,15 +1,18 @@
 package id.jyotisa.praktikumprogmob2021;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,10 +28,8 @@ import id.jyotisa.praktikumprogmob2021.model.Job;
 
 public class ListActivity extends AppCompatActivity {
 
-
-    RecyclerView recyclerView;
-    SQLiteDatabase sqLiteDatabase;
-    TextView valid;
+    private RecyclerView recyclerView;
+    private SQLiteDatabase sqLiteDatabase;
     private ArrayList<Job> jobHolder = new ArrayList<>();
 
     @Override
@@ -53,5 +54,23 @@ public class ListActivity extends AppCompatActivity {
 
         JobsAdapter adapter = new  JobsAdapter(jobHolder, ListActivity.this, sqLiteDatabase);
         recyclerView.setAdapter((RecyclerView.Adapter) adapter);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(ListActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

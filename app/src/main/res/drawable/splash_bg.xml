@@ -3,10 +3,10 @@
 
     <item android:drawable="@color/white"/>
 
-    <item android:gravity="center" android:width="414dp" android:height="414dp">
+    <item android:gravity="center" android:width="70dp" android:height="70dp">
         <bitmap
             android:gravity="fill_horizontal|fill_vertical"
-            android:src="@drawable/intro_hero"/>
+            android:src="@drawable/logo"/>
     </item>
 
 

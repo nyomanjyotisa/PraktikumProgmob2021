@@ -6,9 +6,13 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import es.dmoral.toasty.Toasty;
+import id.jyotisa.praktikumprogmob2021.AddJobActivity;
+import id.jyotisa.praktikumprogmob2021.DetailActivity;
 import id.jyotisa.praktikumprogmob2021.ListActivity;
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -69,7 +73,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void deleteData(Integer id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DELETE FROM tb_job WHERE id='" + id + "'");
+        if(db.delete(TABLE_NAME, "id" + "=" + id, null) > 0){
+            Toasty.success(context, "Delete Success", Toast.LENGTH_SHORT, true).show();
+        }else {
+            Toasty.error(context, "Delete Failed", Toast.LENGTH_SHORT, true).show();
+        }
     }
 
     public void updateJob (Integer id, String companyName, String country, String jobTitle, String jobDesc, String jobType, String benefits, Integer salary){
@@ -82,9 +90,12 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put(JOB_TYPE_COLUMN, jobType);
         contentValues.put(BENEFITS_COLUMN, benefits);
         contentValues.put(SALARY_COLUMN, salary);
-        db.update(TABLE_NAME, contentValues, "id" + "='" + id + "'", null);
-
-        Intent intent = new Intent(context, ListActivity.class);
-        context.startActivity(intent);
+        if(db.update(TABLE_NAME, contentValues, "id" + "='" + id + "'", null) > 0){
+            Toasty.success(context, "Update Success", Toast.LENGTH_SHORT, true).show();
+            Intent intent = new Intent(context, ListActivity.class);
+            context.startActivity(intent);
+        }else {
+            Toasty.error(context, "Update Failed", Toast.LENGTH_SHORT, true).show();
+        }
     }
 }

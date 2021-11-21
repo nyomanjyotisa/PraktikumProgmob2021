@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:background="@drawable/orange_background"
-        android:backgroundTint="@color/bgCard"/>
+        android:backgroundTint="@color/white"/>
 
     <ImageView
         android:id="@+id/heroLeft"
@@ -45,7 +45,7 @@
         android:text="Google LCC"
         android:textStyle="bold"
         android:textSize="18sp"
-        android:textColor="@color/black"
+        android:textColor="@color/blue"
         app:layout_constraintLeft_toRightOf="@+id/heroLeft"
         app:layout_constraintRight_toRightOf="@id/hero"
         app:layout_constraintTop_toTopOf="@id/hero"
@@ -74,7 +74,7 @@
         android:text="Junior Software Engineer"
         android:textStyle="bold"
         android:textSize="18sp"
-        android:textColor="@color/black"
+        android:textColor="@color/blue"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintBottom_toTopOf="@+id/salary"
         app:layout_constraintLeft_toLeftOf="@+id/hero"

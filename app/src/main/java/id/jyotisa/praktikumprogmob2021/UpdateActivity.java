@@ -64,7 +64,7 @@ public class UpdateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add);
         setCustomActionBar();
 
-        job = getIntent().getParcelableExtra(DetailActivity.JOB);
+        job = getIntent().getParcelableExtra(Constant.JOB);
 
         seekBarSalary = findViewById(R.id.salarySeekBar);
         etCompanyName = findViewById(R.id.companyNameEditText);

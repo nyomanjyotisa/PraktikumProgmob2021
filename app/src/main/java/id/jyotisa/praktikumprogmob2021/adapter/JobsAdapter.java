@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Locale;
 
 import id.jyotisa.praktikumprogmob2021.AddJobActivity;
+import id.jyotisa.praktikumprogmob2021.Constant;
 import id.jyotisa.praktikumprogmob2021.DetailActivity;
 import id.jyotisa.praktikumprogmob2021.ListActivity;
 import id.jyotisa.praktikumprogmob2021.R;
@@ -99,7 +100,7 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.ViewHolder>{
                         jobHolder.get(position).getBenefits(),
                         jobHolder.get(position).getId());
                 Intent intent = new Intent(context, UpdateActivity.class);
-                intent.putExtra(DetailActivity.JOB, job);
+                intent.putExtra(Constant.JOB, job);
                 context.startActivity(intent);
             }
         });
@@ -116,7 +117,7 @@ public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.ViewHolder>{
                         jobHolder.get(position).getBenefits(),
                         jobHolder.get(position).getId());
                 Intent intent = new Intent(context, DetailActivity.class);
-                intent.putExtra(DetailActivity.JOB, job);
+                intent.putExtra(Constant.JOB, job);
                 context.startActivity(intent);
             }
         });

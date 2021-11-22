@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ChipNavigationBar chipNavigationBar;
     private Fragment fragment = null;
-    private Long pressedTime;
+    private long pressedTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

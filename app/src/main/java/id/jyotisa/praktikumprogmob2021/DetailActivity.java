@@ -36,7 +36,6 @@ import id.jyotisa.praktikumprogmob2021.helper.DBHelper;
 import id.jyotisa.praktikumprogmob2021.model.Job;
 
 public class DetailActivity extends AppCompatActivity {
-    public final static String JOB = "id.jyotisa.praktikumprogmob2021.JOB";
     private TextView tvJobTitle, tvJobDesc, tvLocation, tvSalary, tvJobType, tvBenefits, tvCompanyName;
     private Job job;
     private DBHelper db;
@@ -49,7 +48,7 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         setCustomActionBar();
 
-        job = getIntent().getParcelableExtra(JOB);
+        job = getIntent().getParcelableExtra(Constant.JOB);
 
         tvCompanyName = (TextView) findViewById(R.id.companyName);
         tvJobTitle = (TextView) findViewById(R.id.jobName);

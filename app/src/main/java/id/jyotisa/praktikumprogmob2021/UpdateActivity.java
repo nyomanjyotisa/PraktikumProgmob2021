@@ -40,14 +40,10 @@ import id.jyotisa.praktikumprogmob2021.helper.DBHelper;
 import id.jyotisa.praktikumprogmob2021.model.Job;
 
 public class UpdateActivity extends AppCompatActivity {
-    private Button btnSubmit, btnPost;
-    private AlertDialog.Builder dialog;
-    private LayoutInflater inflater;
-    private View dialogView;
+    private Button btnSubmit;
     private TextInputLayout etCompanyName, etJobTitle, etJobDesc, etCountry;
     private EditText etSalary;
     private ArrayList<String> benefits;
-    private TextView tvCompanyName, tvJobTitle, tvJobDesc, tvCountry, tvSalary, tvJobType, tvBenefits;
     private RadioGroup radioJobType;
     private CheckBox benefit1, benefit2, benefit3, benefit4;
     private RadioButton radioButtonJobType, radioJobType1, radioJobType2, radioJobType3;

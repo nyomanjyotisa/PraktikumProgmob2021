@@ -40,6 +40,7 @@ public class ListActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#ffffff")));
         getSupportActionBar().setTitle("Your Job Vacancies");
+
         DBHelper db = new DBHelper(this);
 
         recyclerView = (RecyclerView) findViewById(R.id.rvJobs);
@@ -48,7 +49,14 @@ public class ListActivity extends AppCompatActivity {
         Cursor cursor = new DBHelper(this).readJobs();
 
         while(cursor.moveToNext()){
-            Job obj = new Job(cursor.getString(1), cursor.getString(3), cursor.getString(4), cursor.getString(2), cursor.getString(5), cursor.getInt(7), cursor.getString(6), cursor.getInt(0));
+            Job obj = new Job(cursor.getString(1),
+                    cursor.getString(3),
+                    cursor.getString(4),
+                    cursor.getString(2),
+                    cursor.getString(5),
+                    cursor.getInt(7),
+                    cursor.getString(6),
+                    cursor.getInt(0));
             jobHolder.add(obj);
         }
 

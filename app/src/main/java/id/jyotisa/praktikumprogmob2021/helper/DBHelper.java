@@ -20,6 +20,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "db_jobify";
     private static final int DATABASE_VERSION = 1;
     private static final String TABLE_NAME = "tb_job";
+    private static final String ID_COLUMN = "id";
     private static final String COMPANY_NAME_COLUMN = "companyName";
     private static final String COUNTRY_COLUMN = "country";
     private static final String JOB_TITLE_COLUMN = "jobTitle";
@@ -36,7 +37,8 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE "
-                +TABLE_NAME+"(id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                +TABLE_NAME+"("
+                +ID_COLUMN+" INTEGER PRIMARY KEY AUTOINCREMENT, "
                 +COMPANY_NAME_COLUMN+" TEXT, "
                 +COUNTRY_COLUMN+" TEXT, "
                 +JOB_TITLE_COLUMN+" TEXT, "
@@ -73,7 +75,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void deleteData(Integer id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        if(db.delete(TABLE_NAME, "id" + "=" + id, null) > 0){
+        if(db.delete(TABLE_NAME, ID_COLUMN + "=" + id, null) > 0){
             Toasty.success(context, "Delete Success", Toast.LENGTH_SHORT, true).show();
         }else {
             Toasty.error(context, "Delete Failed", Toast.LENGTH_SHORT, true).show();
@@ -90,7 +92,7 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put(JOB_TYPE_COLUMN, jobType);
         contentValues.put(BENEFITS_COLUMN, benefits);
         contentValues.put(SALARY_COLUMN, salary);
-        if(db.update(TABLE_NAME, contentValues, "id" + "='" + id + "'", null) > 0){
+        if(db.update(TABLE_NAME, contentValues, ID_COLUMN + "=" + id, null) > 0){
             Toasty.success(context, "Update Success", Toast.LENGTH_SHORT, true).show();
             Intent intent = new Intent(context, ListActivity.class);
             context.startActivity(intent);

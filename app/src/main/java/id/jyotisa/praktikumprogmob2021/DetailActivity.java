@@ -172,9 +172,6 @@ public class DetailActivity extends AppCompatActivity {
                 AlertDialog dialog = alertDialog.create();
                 dialog.show();
                 return true;
-            case R.id.share:
-                onBackPressed();
-                return true;
         }
 
         return false;

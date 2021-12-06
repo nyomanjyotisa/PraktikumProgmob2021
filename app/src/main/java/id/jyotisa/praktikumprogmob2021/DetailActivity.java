@@ -145,7 +145,7 @@ public class DetailActivity extends AppCompatActivity {
                         job.getBenefits(),
                         job.getId());
                 Intent intent = new Intent(DetailActivity.this, UpdateActivity.class);
-                intent.putExtra("JOB", jobNew);
+                intent.putExtra(Constant.JOB, jobNew);
                 startActivity(intent);
                 return true;
             case R.id.delete:

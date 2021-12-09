@@ -3,19 +3,15 @@ package id.jyotisa.praktikumprogmob2021;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,8 +26,6 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 import es.dmoral.toasty.Toasty;
-import id.jyotisa.praktikumprogmob2021.auth.LoginActivity;
-import id.jyotisa.praktikumprogmob2021.auth.SignupActivity;
 import id.jyotisa.praktikumprogmob2021.helper.DBHelper;
 import id.jyotisa.praktikumprogmob2021.model.Job;
 
@@ -48,7 +42,7 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         setCustomActionBar();
 
-        job = getIntent().getParcelableExtra(Constant.JOB);
+        job = getIntent().getParcelableExtra(Constant.JOB_TO_DETAIL);
 
         tvCompanyName = (TextView) findViewById(R.id.companyName);
         tvJobTitle = (TextView) findViewById(R.id.jobName);
@@ -145,7 +139,7 @@ public class DetailActivity extends AppCompatActivity {
                         job.getBenefits(),
                         job.getId());
                 Intent intent = new Intent(DetailActivity.this, UpdateActivity.class);
-                intent.putExtra(Constant.JOB, jobNew);
+                intent.putExtra(Constant.JOB_TO_UPDATE, jobNew);
                 startActivity(intent);
                 return true;
             case R.id.delete:
@@ -165,7 +159,7 @@ public class DetailActivity extends AppCompatActivity {
                         db = new DBHelper(DetailActivity.this);
                         db.deleteData(job.getId());
                         Log.v("cuy", "masukkk" + job.getId());
-                        startActivity(new Intent(DetailActivity.this, ListActivity.class));
+                        startActivity(new Intent(DetailActivity.this, MainActivity.class));
                     }
                 });
 
@@ -180,6 +174,6 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(DetailActivity.this, ListActivity.class));
+        startActivity(new Intent(DetailActivity.this, MainActivity.class));
     }
 }

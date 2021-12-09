@@ -149,7 +149,7 @@ public class AddJobActivity extends AppCompatActivity {
                 saveDataToDB();
 
                 Intent intent = new Intent(AddJobActivity.this, DetailActivity.class);
-                intent.putExtra(Constant.JOB, job);
+                intent.putExtra(Constant.JOB_TO_DETAIL, job);
                 startActivity(intent);
             }
         });

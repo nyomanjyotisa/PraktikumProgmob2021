@@ -11,9 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import es.dmoral.toasty.Toasty;
-import id.jyotisa.praktikumprogmob2021.AddJobActivity;
-import id.jyotisa.praktikumprogmob2021.DetailActivity;
-import id.jyotisa.praktikumprogmob2021.ListActivity;
+import id.jyotisa.praktikumprogmob2021.MainActivity;
 
 public class DBHelper extends SQLiteOpenHelper {
     private final Context context;
@@ -94,7 +92,7 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put(SALARY_COLUMN, salary);
         if(db.update(TABLE_NAME, contentValues, ID_COLUMN + "=" + id, null) > 0){
             Toasty.success(context, "Update Success", Toast.LENGTH_SHORT, true).show();
-            Intent intent = new Intent(context, ListActivity.class);
+            Intent intent = new Intent(context, MainActivity.class);
             context.startActivity(intent);
         }else {
             Toasty.error(context, "Update Failed", Toast.LENGTH_SHORT, true).show();

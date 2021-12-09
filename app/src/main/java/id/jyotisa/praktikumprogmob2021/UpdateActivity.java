@@ -1,6 +1,5 @@
 package id.jyotisa.praktikumprogmob2021;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -8,34 +7,26 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.amulyakhare.textdrawable.TextDrawable;
-import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 import es.dmoral.toasty.Toasty;
-import id.jyotisa.praktikumprogmob2021.fragment.NewFragment;
 import id.jyotisa.praktikumprogmob2021.helper.DBHelper;
 import id.jyotisa.praktikumprogmob2021.model.Job;
 
@@ -60,7 +51,7 @@ public class UpdateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add);
         setCustomActionBar();
 
-        job = getIntent().getParcelableExtra(Constant.JOB);
+        job = getIntent().getParcelableExtra(Constant.JOB_TO_UPDATE);
 
         seekBarSalary = findViewById(R.id.salarySeekBar);
         etCompanyName = findViewById(R.id.companyNameEditText);
@@ -309,7 +300,7 @@ public class UpdateActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(UpdateActivity.this, ListActivity.class);
+        Intent intent = new Intent(UpdateActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
     }

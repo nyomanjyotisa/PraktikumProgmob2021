@@ -101,7 +101,7 @@ public class AddJobActivity extends AppCompatActivity {
         //benefits array to string
         stringBenefits = new StringBuilder();
         for (String s : benefits)
-            stringBenefits.append(" - "+s).append("\n");
+            stringBenefits.append("\n - "+s);
 
         //set format for salary
         Integer salary;

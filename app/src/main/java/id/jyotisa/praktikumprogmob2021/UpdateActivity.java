@@ -88,27 +88,66 @@ public class UpdateActivity extends AppCompatActivity {
         benefit4 = (CheckBox)findViewById(R.id.benefit4);
         benefits = new ArrayList<>();
 
-        String[] benefit = job.getBenefits().split("- ");
+        String[] benefit = job.getBenefits().split("\n - ");
         if(benefit.length > 1){
-            Log.v("babi0", benefit[0]);
-            Log.v("babi1", benefit[1].replaceAll("\\s+$", ""));
-            benefit1.setChecked(true);
-            benefits.add(benefit1.getText().toString());
+            if(benefit[1].equals(benefit1.getText().toString())){
+                benefit1.setChecked(true);
+                benefits.add(benefit1.getText().toString());
+            }else if(benefit[1].equals(benefit2.getText().toString())){
+                benefit2.setChecked(true);
+                benefits.add(benefit2.getText().toString());
+            }else if(benefit[1].equals(benefit3.getText().toString())){
+                benefit3.setChecked(true);
+                benefits.add(benefit3.getText().toString());
+            }else if(benefit[1].equals(benefit4.getText().toString())){
+                benefit4.setChecked(true);
+                benefits.add(benefit4.getText().toString());
+            }
         }
         if(benefit.length > 2){
-            Log.v("babi2", benefit[2].replaceAll("\\s+$", ""));
-            benefit2.setChecked(true);
-            benefits.add(benefit2.getText().toString());
+            if(benefit[2].equals(benefit1.getText().toString())){
+                benefit1.setChecked(true);
+                benefits.add(benefit1.getText().toString());
+            }else if(benefit[2].equals(benefit2.getText().toString())){
+                benefit2.setChecked(true);
+                benefits.add(benefit2.getText().toString());
+            }else if(benefit[2].equals(benefit3.getText().toString())){
+                benefit3.setChecked(true);
+                benefits.add(benefit3.getText().toString());
+            }else if(benefit[2].equals(benefit4.getText().toString())){
+                benefit4.setChecked(true);
+                benefits.add(benefit4.getText().toString());
+            }
         }
         if(benefit.length > 3){
-            Log.v("babi3", benefit[3].replaceAll("\\s+$", ""));
-            benefit3.setChecked(true);
-            benefits.add(benefit3.getText().toString());
+            if(benefit[3].equals(benefit1.getText().toString())){
+                benefit1.setChecked(true);
+                benefits.add(benefit1.getText().toString());
+            }else if(benefit[3].equals(benefit2.getText().toString())){
+                benefit2.setChecked(true);
+                benefits.add(benefit2.getText().toString());
+            }else if(benefit[3].equals(benefit3.getText().toString())){
+                benefit3.setChecked(true);
+                benefits.add(benefit3.getText().toString());
+            }else if(benefit[3].equals(benefit4.getText().toString())){
+                benefit4.setChecked(true);
+                benefits.add(benefit4.getText().toString());
+            }
         }
         if(benefit.length > 4){
-            Log.v("babi4", benefit[4].replaceAll("\\s+$", ""));
-            benefit4.setChecked(true);
-            benefits.add(benefit4.getText().toString());
+            if(benefit[4].equals(benefit1.getText().toString())){
+                benefit1.setChecked(true);
+                benefits.add(benefit1.getText().toString());
+            }else if(benefit[4].equals(benefit2.getText().toString())){
+                benefit2.setChecked(true);
+                benefits.add(benefit2.getText().toString());
+            }else if(benefit[4].equals(benefit3.getText().toString())){
+                benefit3.setChecked(true);
+                benefits.add(benefit3.getText().toString());
+            }else if(benefit[4].equals(benefit4.getText().toString())){
+                benefit4.setChecked(true);
+                benefits.add(benefit4.getText().toString());
+            }
         }
         
         benefitOnClick();
@@ -309,7 +348,7 @@ public class UpdateActivity extends AppCompatActivity {
         //benefits array to string
         stringBenefits = new StringBuilder();
         for (String s : benefits)
-            stringBenefits.append(" - "+s).append("\n");
+            stringBenefits.append("\n - "+s);
 
         //set format for salary
         Integer salary;
